@@ -1,0 +1,24 @@
+^C:\USERS\CAKIT\DESKTOP\CMAKE_PROJECT\BUILD\WIN-X64\_DEPS\GLFW-BUILD\DOCS\DOXYFILE
+setlocal
+cd C:\Users\cakit\Desktop\cmake_project\build\win-x64\_deps\glfw-build\docs
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+C:\Users\cakit\scoop\shims\doxygen.exe
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\CAKIT\DESKTOP\CMAKE_PROJECT\BUILD\WIN-X64\_DEPS\GLFW-SRC\DOCS\CMAKELISTS.TXT
+setlocal
+C:\Users\cakit\scoop\apps\cmake\current\bin\cmake.exe -SC:/Users/cakit/Desktop/cmake_project -BC:/Users/cakit/Desktop/cmake_project/build/win-x64 --check-stamp-file C:/Users/cakit/Desktop/cmake_project/build/win-x64/_deps/glfw-build/docs/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

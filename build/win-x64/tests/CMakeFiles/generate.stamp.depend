@@ -1,0 +1,16 @@
+# CMake generation dependency list for this directory.
+C:/Users/cakit/Desktop/cmake_project/build/win-x64/CMakeFiles/fc-tmp/catch/catch-gitclone.cmake
+C:/Users/cakit/Desktop/cmake_project/build/win-x64/CMakeFiles/fc-tmp/catch/catch-gitupdate.cmake
+C:/Users/cakit/Desktop/cmake_project/build/win-x64/CMakeFiles/fc-tmp/catch/download.cmake
+C:/Users/cakit/Desktop/cmake_project/build/win-x64/CMakeFiles/fc-tmp/catch/patch.cmake
+C:/Users/cakit/Desktop/cmake_project/build/win-x64/CMakeFiles/fc-tmp/catch/update.cmake
+C:/Users/cakit/Desktop/cmake_project/tests/CMakeLists.txt
+C:/Users/cakit/scoop/apps/cmake/current/share/cmake-4.0/Modules/ExternalProject/PatchInfo.txt.in
+C:/Users/cakit/scoop/apps/cmake/current/share/cmake-4.0/Modules/ExternalProject/RepositoryInfo.txt.in
+C:/Users/cakit/scoop/apps/cmake/current/share/cmake-4.0/Modules/ExternalProject/UpdateInfo.txt.in
+C:/Users/cakit/scoop/apps/cmake/current/share/cmake-4.0/Modules/ExternalProject/gitclone.cmake.in
+C:/Users/cakit/scoop/apps/cmake/current/share/cmake-4.0/Modules/ExternalProject/gitupdate.cmake.in
+C:/Users/cakit/scoop/apps/cmake/current/share/cmake-4.0/Modules/ExternalProject/stepscript.cmake.in
+C:/Users/cakit/scoop/apps/cmake/current/share/cmake-4.0/Modules/FindGit.cmake
+C:/Users/cakit/scoop/apps/cmake/current/share/cmake-4.0/Modules/FindPackageHandleStandardArgs.cmake
+C:/Users/cakit/scoop/apps/cmake/current/share/cmake-4.0/Modules/FindPackageMessage.cmake

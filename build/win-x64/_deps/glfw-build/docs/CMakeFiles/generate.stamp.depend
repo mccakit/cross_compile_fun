@@ -1,0 +1,6 @@
+# CMake generation dependency list for this directory.
+C:/Users/cakit/Desktop/cmake_project/build/win-x64/_deps/glfw-src/docs/CMakeLists.txt
+C:/Users/cakit/Desktop/cmake_project/build/win-x64/_deps/glfw-src/docs/Doxyfile.in
+C:/Users/cakit/scoop/apps/cmake/current/share/cmake-4.0/Modules/FindDoxygen.cmake
+C:/Users/cakit/scoop/apps/cmake/current/share/cmake-4.0/Modules/FindPackageHandleStandardArgs.cmake
+C:/Users/cakit/scoop/apps/cmake/current/share/cmake-4.0/Modules/FindPackageMessage.cmake

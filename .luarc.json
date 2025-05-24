@@ -1,0 +1,6 @@
+{
+    "workspace.userThirdParty": ["C:/Users/cakit/Documents/LLS-Addons/addons"],
+    "workspace.library": [
+        "C:/Users/cakit/Documents/LLS-Addons/addons/xmake/module/library"
+    ]
+}
