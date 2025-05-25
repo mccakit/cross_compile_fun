@@ -9,14 +9,7 @@ project(
 include(CTest)
 include(FetchContent)
 
-
-set(GLFW_BUILD_EXAMPLES OFF)
-set(GLFW_BUILD_TESTS OFF)
-set(GLFW_BUILD_DOCS OFF)
-set(GLFW_INSTALL OFF)
-set(GLFW_BUILD_WAYLAND ON)
-set(GLFW_BUILD_X11 OFF)
-add_subdirectory(extern/glfw)
+add_subdirectory(extern/sdl3)
 add_subdirectory(source)
 add_subdirectory(apps)
 add_subdirectory(tests)

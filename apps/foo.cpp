@@ -1,57 +1,98 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <iostream>
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_main.h>
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-    glViewport(0, 0, width, height);
+/* Constants */
+//Screen dimension constants
+constexpr int kScreenWidth{ 640 };
+constexpr int kScreenHeight{ 480 };
+
+/* Function Prototypes */
+//Starts up SDL and creates window
+bool init();
+//Frees media and shuts down SDL
+void close();
+
+/* Global Variables */
+//The window we'll be rendering to
+SDL_Window* gWindow{ nullptr };
+//The surface contained by the window
+SDL_Surface* gScreenSurface{ nullptr };
+
+/* Function Implementations */
+bool init()
+{
+    //Initialization flag
+    bool success{ true };
+    //Initialize SDL
+    if( !SDL_Init( SDL_INIT_VIDEO ) )
+    {
+        SDL_Log( "SDL could not initialize! SDL error: %s\n", SDL_GetError() );
+        success = false;
+    }
+    else
+    {
+        //Create window
+        if( gWindow = SDL_CreateWindow( "SDL3 Tutorial: Hello SDL3", kScreenWidth, kScreenHeight, 0 ); gWindow == nullptr )
+        {
+            SDL_Log( "Window could not be created! SDL error: %s\n", SDL_GetError() );
+            success = false;
+        }
+        else
+        {
+            //Get window surface
+            gScreenSurface = SDL_GetWindowSurface( gWindow );
+        }
+    }
+    return success;
 }
 
-void process_input(GLFWwindow* window) {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+void close()
+{
+    //Destroy window
+    SDL_DestroyWindow( gWindow );
+    gWindow = nullptr;
+    gScreenSurface = nullptr;
+    //Quit SDL subsystems
+    SDL_Quit();
 }
 
-int main() {
-    if (!glfwInit()) {
-        std::cerr << "Failed to initialize GLFW\n";
-        return -1;
+int main( int argc, char* args[] )
+{
+    //Final exit code
+    int exitCode{ 0 };
+    //Initialize
+    if( !init() )
+    {
+        SDL_Log( "Unable to initialize program!\n" );
+        exitCode = 1;
     }
-
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
-
-    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Window", nullptr, nullptr);
-    if (!window) {
-        std::cerr << "Failed to create GLFW window\n";
-        glfwTerminate();
-        return -1;
+    else
+    {
+        //The quit flag
+        bool quit{ false };
+        //The event data
+        SDL_Event e;
+        SDL_zero( e );
+        //The main loop
+        while( quit == false )
+        {
+            //Get event data
+            while( SDL_PollEvent( &e ) )
+            {
+                //If event is quit type
+                if( e.type == SDL_EVENT_QUIT )
+                {
+                    //End the main loop
+                    quit = true;
+                }
+            }
+            //Fill the surface with a nice blue color
+            SDL_FillSurfaceRect( gScreenSurface, nullptr, SDL_MapSurfaceRGB( gScreenSurface, 0x00, 0x7F, 0xFF ) );
+            //Update the surface
+            SDL_UpdateWindowSurface( gWindow );
+        }
     }
-
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        std::cerr << "Failed to initialize GLAD\n";
-        return -1;
-    }
-
-    glViewport(0, 0, 800, 600);
-
-    while (!glfwWindowShouldClose(window)) {
-        process_input(window);
-
-        glClearColor(0.1f, 0.1f, 0.2f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-
-    glfwDestroyWindow(window);
-    glfwTerminate();
-    return 0;
+    //Clean up
+    close();
+    return exitCode;
 }

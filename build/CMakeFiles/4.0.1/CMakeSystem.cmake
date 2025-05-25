@@ -1,0 +1,15 @@
+set(CMAKE_HOST_SYSTEM "Windows-10.0.19045")
+set(CMAKE_HOST_SYSTEM_NAME "Windows")
+set(CMAKE_HOST_SYSTEM_VERSION "10.0.19045")
+set(CMAKE_HOST_SYSTEM_PROCESSOR "AMD64")
+
+include("C:/Users/cakit/Desktop/cmake_template/toolchains/llvm-linux-x64.cmake")
+
+set(CMAKE_SYSTEM "Linux")
+set(CMAKE_SYSTEM_NAME "Linux")
+set(CMAKE_SYSTEM_VERSION "")
+set(CMAKE_SYSTEM_PROCESSOR "x86_64")
+
+set(CMAKE_CROSSCOMPILING "TRUE")
+
+set(CMAKE_SYSTEM_LOADED 1)
