@@ -1,0 +1,2 @@
+C:/Users/cakit/Desktop/cmake_template/__cmake_systeminformation/CMakeFiles/CMakeScratch/TryCompile-cwnxm7/CMakeFiles/cmTC_83516.dir
+C:/Users/cakit/Desktop/cmake_template/__cmake_systeminformation/CMakeFiles/CMakeScratch/TryCompile-cwnxm7/CMakeFiles/ALL_BUILD.dir

@@ -1,98 +1,172 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include <imgui.h>
+#include <imgui_impl_sdl3.h>
+#include <imgui_impl_sdlrenderer3.h>
 
 /* Constants */
-//Screen dimension constants
-constexpr int kScreenWidth{ 640 };
-constexpr int kScreenHeight{ 480 };
-
-/* Function Prototypes */
-//Starts up SDL and creates window
-bool init();
-//Frees media and shuts down SDL
-void close();
+constexpr int kScreenWidth{ 1280 };
+constexpr int kScreenHeight{ 720 };
 
 /* Global Variables */
-//The window we'll be rendering to
 SDL_Window* gWindow{ nullptr };
-//The surface contained by the window
-SDL_Surface* gScreenSurface{ nullptr };
+SDL_Renderer* gRenderer{ nullptr };
+
+/* Function Prototypes */
+bool init();
+void close();
+void render();
 
 /* Function Implementations */
 bool init()
 {
-    //Initialization flag
     bool success{ true };
-    //Initialize SDL
-    if( !SDL_Init( SDL_INIT_VIDEO ) )
+
+    // Initialize SDL
+    if (!SDL_Init(SDL_INIT_VIDEO))
     {
-        SDL_Log( "SDL could not initialize! SDL error: %s\n", SDL_GetError() );
+        SDL_Log("SDL could not initialize! SDL error: %s\n", SDL_GetError());
         success = false;
     }
     else
     {
-        //Create window
-        if( gWindow = SDL_CreateWindow( "SDL3 Tutorial: Hello SDL3", kScreenWidth, kScreenHeight, 0 ); gWindow == nullptr )
+        // Create window
+        gWindow = SDL_CreateWindow("ImGui Hello World", kScreenWidth, kScreenHeight, SDL_WINDOW_RESIZABLE);
+        if (gWindow == nullptr)
         {
-            SDL_Log( "Window could not be created! SDL error: %s\n", SDL_GetError() );
+            SDL_Log("Window could not be created! SDL error: %s\n", SDL_GetError());
             success = false;
         }
         else
         {
-            //Get window surface
-            gScreenSurface = SDL_GetWindowSurface( gWindow );
+            // Create renderer
+            gRenderer = SDL_CreateRenderer(gWindow, nullptr);
+            if (gRenderer == nullptr)
+            {
+                SDL_Log("Renderer could not be created! SDL error: %s\n", SDL_GetError());
+                success = false;
+            }
+            else
+            {
+                // Setup Dear ImGui context
+                IMGUI_CHECKVERSION();
+                ImGui::CreateContext();
+                ImGuiIO& io = ImGui::GetIO(); (void)io;
+                io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+
+                // Setup Dear ImGui style
+                ImGui::StyleColorsDark();
+
+                // Setup Platform/Renderer backends
+                ImGui_ImplSDL3_InitForSDLRenderer(gWindow, gRenderer);
+                ImGui_ImplSDLRenderer3_Init(gRenderer);
+            }
         }
     }
+
     return success;
 }
 
 void close()
 {
-    //Destroy window
-    SDL_DestroyWindow( gWindow );
+    // Cleanup ImGui
+    ImGui_ImplSDLRenderer3_Shutdown();
+    ImGui_ImplSDL3_Shutdown();
+    ImGui::DestroyContext();
+
+    // Destroy renderer and window
+    SDL_DestroyRenderer(gRenderer);
+    SDL_DestroyWindow(gWindow);
+    gRenderer = nullptr;
     gWindow = nullptr;
-    gScreenSurface = nullptr;
-    //Quit SDL subsystems
+
+    // Quit SDL subsystems
     SDL_Quit();
 }
 
-int main( int argc, char* args[] )
+void render()
 {
-    //Final exit code
-    int exitCode{ 0 };
-    //Initialize
-    if( !init() )
+    // Start the Dear ImGui frame
+    ImGui_ImplSDLRenderer3_NewFrame();
+    ImGui_ImplSDL3_NewFrame();
+    ImGui::NewFrame();
+
+    // Create a simple hello world window
+    static bool show_demo_window = false;
+    static bool show_hello_window = true;
+    static float clear_color[3] = { 0.0f, 0.5f, 1.0f }; // Nice blue color
+
+    if (show_hello_window)
     {
-        SDL_Log( "Unable to initialize program!\n" );
+        ImGui::Begin("Hello, World!", &show_hello_window);
+
+        ImGui::Text("This is some useful text.");
+        ImGui::Checkbox("Demo Window", &show_demo_window);
+
+        ImGui::ColorEdit3("Clear color", clear_color);
+
+        static int counter = 0;
+        if (ImGui::Button("Button"))
+            counter++;
+        ImGui::SameLine();
+        ImGui::Text("counter = %d", counter);
+
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
+                   1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        ImGui::End();
+    }
+
+    // Show the demo window if requested
+    if (show_demo_window)
+        ImGui::ShowDemoWindow(&show_demo_window);
+
+    // Rendering
+    ImGui::Render();
+    SDL_SetRenderDrawColor(gRenderer,
+                          (Uint8)(clear_color[0] * 255),
+                          (Uint8)(clear_color[1] * 255),
+                          (Uint8)(clear_color[2] * 255),
+                          255);
+    SDL_RenderClear(gRenderer);
+    ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), gRenderer);
+    SDL_RenderPresent(gRenderer);
+}
+
+int main(int argc, char* args[])
+{
+    int exitCode{ 0 };
+
+    // Initialize
+    if (!init())
+    {
+        SDL_Log("Unable to initialize program!\n");
         exitCode = 1;
     }
     else
     {
-        //The quit flag
         bool quit{ false };
-        //The event data
         SDL_Event e;
-        SDL_zero( e );
-        //The main loop
-        while( quit == false )
+
+        // Main loop
+        while (!quit)
         {
-            //Get event data
-            while( SDL_PollEvent( &e ) )
+            // Handle events
+            while (SDL_PollEvent(&e))
             {
-                //If event is quit type
-                if( e.type == SDL_EVENT_QUIT )
+                ImGui_ImplSDL3_ProcessEvent(&e);
+
+                if (e.type == SDL_EVENT_QUIT)
                 {
-                    //End the main loop
                     quit = true;
                 }
             }
-            //Fill the surface with a nice blue color
-            SDL_FillSurfaceRect( gScreenSurface, nullptr, SDL_MapSurfaceRGB( gScreenSurface, 0x00, 0x7F, 0xFF ) );
-            //Update the surface
-            SDL_UpdateWindowSurface( gWindow );
+
+            // Render everything
+            render();
         }
     }
-    //Clean up
+
+    // Clean up
     close();
     return exitCode;
 }
