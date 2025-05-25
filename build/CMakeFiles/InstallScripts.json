@@ -3,11 +3,10 @@
 	[
 		"C:/Users/cakit/Desktop/cmake_template/build/cmake_install.cmake",
 		"C:/Users/cakit/Desktop/cmake_template/build/extern/sdl3/cmake_install.cmake",
-		"C:/Users/cakit/Desktop/cmake_template/build/extern/imgui/cmake_install.cmake",
+		"C:/Users/cakit/Desktop/cmake_template/build/extern/cmake_install.cmake",
 		"C:/Users/cakit/Desktop/cmake_template/build/source/cmake_install.cmake",
 		"C:/Users/cakit/Desktop/cmake_template/build/apps/cmake_install.cmake",
-		"C:/Users/cakit/Desktop/cmake_template/build/tests/cmake_install.cmake",
-		"C:/Users/cakit/Desktop/cmake_template/build/_deps/catch-build/cmake_install.cmake"
+		"C:/Users/cakit/Desktop/cmake_template/build/tests/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

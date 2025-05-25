@@ -36,11 +36,10 @@ C:/Users/cakit/Desktop/cmake_template/build/extern/sdl3/CMakeFiles/SDL_uclibc.di
 C:/Users/cakit/Desktop/cmake_template/build/extern/sdl3/CMakeFiles/test.dir
 C:/Users/cakit/Desktop/cmake_template/build/extern/sdl3/CMakeFiles/edit_cache.dir
 C:/Users/cakit/Desktop/cmake_template/build/extern/sdl3/CMakeFiles/rebuild_cache.dir
-C:/Users/cakit/Desktop/cmake_template/build/extern/imgui/CMakeFiles/imgui.dir
-C:/Users/cakit/Desktop/cmake_template/build/extern/imgui/CMakeFiles/test.dir
-C:/Users/cakit/Desktop/cmake_template/build/extern/imgui/CMakeFiles/edit_cache.dir
-C:/Users/cakit/Desktop/cmake_template/build/extern/imgui/CMakeFiles/rebuild_cache.dir
-C:/Users/cakit/Desktop/cmake_template/build/source/CMakeFiles/glad.dir
+C:/Users/cakit/Desktop/cmake_template/build/extern/CMakeFiles/imgui.dir
+C:/Users/cakit/Desktop/cmake_template/build/extern/CMakeFiles/test.dir
+C:/Users/cakit/Desktop/cmake_template/build/extern/CMakeFiles/edit_cache.dir
+C:/Users/cakit/Desktop/cmake_template/build/extern/CMakeFiles/rebuild_cache.dir
 C:/Users/cakit/Desktop/cmake_template/build/source/CMakeFiles/test.dir
 C:/Users/cakit/Desktop/cmake_template/build/source/CMakeFiles/edit_cache.dir
 C:/Users/cakit/Desktop/cmake_template/build/source/CMakeFiles/rebuild_cache.dir
@@ -48,10 +47,6 @@ C:/Users/cakit/Desktop/cmake_template/build/apps/CMakeFiles/foo.dir
 C:/Users/cakit/Desktop/cmake_template/build/apps/CMakeFiles/test.dir
 C:/Users/cakit/Desktop/cmake_template/build/apps/CMakeFiles/edit_cache.dir
 C:/Users/cakit/Desktop/cmake_template/build/apps/CMakeFiles/rebuild_cache.dir
-C:/Users/cakit/Desktop/cmake_template/build/tests/CMakeFiles/testlib.dir
 C:/Users/cakit/Desktop/cmake_template/build/tests/CMakeFiles/test.dir
 C:/Users/cakit/Desktop/cmake_template/build/tests/CMakeFiles/edit_cache.dir
 C:/Users/cakit/Desktop/cmake_template/build/tests/CMakeFiles/rebuild_cache.dir
-C:/Users/cakit/Desktop/cmake_template/build/_deps/catch-build/CMakeFiles/test.dir
-C:/Users/cakit/Desktop/cmake_template/build/_deps/catch-build/CMakeFiles/edit_cache.dir
-C:/Users/cakit/Desktop/cmake_template/build/_deps/catch-build/CMakeFiles/rebuild_cache.dir

@@ -49,7 +49,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/cakit/Desktop/cmake_template/build/extern/imgui/cmake_install.cmake")
+  include("C:/Users/cakit/Desktop/cmake_template/build/extern/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
