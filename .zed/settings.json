@@ -2,13 +2,13 @@
     "lsp": {
         "clangd": {
             "binary": {
-                "path": "C:/dev/llvm-project/build/bin/clangd.exe",
+                "path": "clangd.exe",
                 "arguments": ["--background-index"]
             }
         },
         "lua-language-server": {
             "binary": {
-                "path": "C:/Users/cakit/scoop/apps/lua-language-server/current/bin/lua-language-server.exe"
+                "path": "lua-language-server"
             }
         },
         "esbonio": {
@@ -16,13 +16,18 @@
                 "path": "python",
                 "arguments": ["-m", "esbonio"]
             }
+        },
+        "neocmakelsp": {
+          "binary": {
+            "path": "neocmakelsp"
+          }
         }
     },
     "languages": {
         "C++": {
             "formatter": {
                 "external": {
-                    "command": "C:/dev/llvm-project/build/bin/clang-format.exe",
+                    "command": "clang-format",
                     "arguments": ["--style=microsoft", "{buffer_path}"]
                 }
             },
@@ -38,6 +43,7 @@
             "language_servers": ["clangd"]
         },
         "CMake": {
+            "language_servers": ["neocmakelsp"],
             "formatter": {
                 "external": {
                     "command": "gersemi",
