@@ -16,11 +16,6 @@
                 "path": "python",
                 "arguments": ["-m", "esbonio"]
             }
-        },
-        "neocmakelsp": {
-          "binary": {
-            "path": "neocmakelsp"
-          }
         }
     },
     "languages": {
@@ -43,7 +38,6 @@
             "language_servers": ["clangd"]
         },
         "CMake": {
-            "language_servers": ["neocmakelsp"],
             "formatter": {
                 "external": {
                     "command": "gersemi",

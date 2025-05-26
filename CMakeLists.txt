@@ -5,6 +5,7 @@ project(
     DESCRIPTION "An example project with CMake"
     LANGUAGES C CXX
 )
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(CTest)
 include(FetchContent)
