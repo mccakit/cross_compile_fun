@@ -4,6 +4,9 @@
 #include <SDL3_ttf/SDL_ttf.h>
 #include <SDL3_mixer/SDL_mixer.h>
 #include <SDL3_image/SDL_image.h>
+#include "imgui.h"
+#include "backends/imgui_impl_sdl3.h"
+#include "backends/imgui_impl_sdlrenderer3.h"
 #include <cmath>
 #include <string_view>
 #include <filesystem>
@@ -49,6 +52,12 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[]) {
     if (not renderer){
         return SDL_Fail();
     }
+
+    // Initialize ImGui
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    ImGui_ImplSDL3_InitForSDLRenderer(window, renderer);
+    ImGui_ImplSDLRenderer3_Init(renderer);
 
     // load the font
 #if __ANDROID__
@@ -146,6 +155,9 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[]) {
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event* event) {
     auto* app = (AppContext*)appstate;
 
+    // Process ImGui events
+    ImGui_ImplSDL3_ProcessEvent(event);
+
     if (event->type == SDL_EVENT_QUIT) {
         app->app_quit = SDL_APP_SUCCESS;
     }
@@ -155,6 +167,22 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event* event) {
 
 SDL_AppResult SDL_AppIterate(void *appstate) {
     auto* app = (AppContext*)appstate;
+
+    // Start ImGui frame
+    ImGui_ImplSDLRenderer3_NewFrame();
+    ImGui_ImplSDL3_NewFrame();
+    ImGui::NewFrame();
+
+    // Create Hello World window
+    ImGui::SetNextWindowPos(ImGui::GetMainViewport()->Pos);
+    ImGui::SetNextWindowSize(ImGui::GetMainViewport()->Size);
+
+    ImGui::Begin("Hello World Window");
+    ImGui::Text("Hello World!");
+    ImGui::Text("This is an ImGui window integrated with SDL3.");
+    ImGui::Separator();
+    ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
+    ImGui::End();
 
     // draw a color
     auto time = SDL_GetTicks() / 1000.f;
@@ -169,6 +197,10 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
     SDL_RenderTexture(app->renderer, app->imageTex, NULL, NULL);
     SDL_RenderTexture(app->renderer, app->messageTex, NULL, &app->messageDest);
 
+    // Render ImGui
+    ImGui::Render();
+    ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), app->renderer);
+
     SDL_RenderPresent(app->renderer);
 
     return app->app_quit;
@@ -177,6 +209,11 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
 void SDL_AppQuit(void* appstate, SDL_AppResult result) {
     auto* app = (AppContext*)appstate;
     if (app) {
+        // Cleanup ImGui
+        ImGui_ImplSDLRenderer3_Shutdown();
+        ImGui_ImplSDL3_Shutdown();
+        ImGui::DestroyContext();
+
         SDL_DestroyRenderer(app->renderer);
         SDL_DestroyWindow(app->window);
 
