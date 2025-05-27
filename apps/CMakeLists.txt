@@ -17,4 +17,24 @@ if(EMSCRIPTEN)
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/the_entertainer.ogg@/"
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/gs_tiger.svg@/"
     )
+elseif(ANDROID)
+    file(MAKE_DIRECTORY "${MOBILE_ASSETS_DIR}")
+endif()
+macro(copy_helper filename)
+    if(ANDROID)
+        set(outname "${MOBILE_ASSETS_DIR}/${filename}")
+    else()
+        set(outname ${CMAKE_BINARY_DIR}/apps)
+    endif()
+    add_custom_command(
+        TARGET foo POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_CURRENT_LIST_DIR}/${filename}"
+            "${outname}"
+    )
+endmacro()
+if(NOT EMSCRIPTEN)
+    copy_helper("Inter-VariableFont.ttf")
+    copy_helper("the_entertainer.ogg")
+    copy_helper("gs_tiger.svg")
 endif()
