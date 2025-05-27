@@ -5,3 +5,12 @@
 [submodule "extern/imgui"]
 	path = extern/imgui
 	url = git@github.com:ocornut/imgui.git
+[submodule "extern/sdl_image"]
+	path = extern/sdl_image
+	url = git@github.com:libsdl-org/SDL_image.git
+[submodule "extern/sdl_mixer"]
+	path = extern/sdl_mixer
+	url = git@github.com:libsdl-org/SDL_mixer.git
+[submodule "extern/sdl_ttf"]
+	path = extern/sdl_ttf
+	url = git@github.com:libsdl-org/SDL_ttf.git

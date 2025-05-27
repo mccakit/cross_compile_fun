@@ -5,13 +5,35 @@ project(
     DESCRIPTION "An example project with CMake"
     LANGUAGES C CXX
 )
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
+set(CMAKE_BUILD_SHARED_LIBS OFF)
 include(CTest)
 include(FetchContent)
-
+if(EMSCRIPTEN)
+    set(CMAKE_EXECUTABLE_SUFFIX ".html")
+endif()
 set(SDL_STATIC ON)
 add_subdirectory(extern/sdl3)
+
+set(SDLTTF_VENDORED ON)
+add_subdirectory(extern/sdl_ttf)
+
+set(SDLMIXER_MIDI_NATIVE OFF)
+set(SDLMIXER_GME OFF)
+set(SDLMIXER_WAVPACK OFF)
+set(SDLMIXER_MOD OFF)
+set(SDLMIXER_OPUS OFF)
+set(SDLMIXER_VENDORED ON)
+add_subdirectory(extern/sdl_mixer)
+
+set(SDLIMAGE_VENDORED ON)
+set(SDLIMAGE_AVIF OFF)
+set(SDLIMAGE_BMP OFF)
+set(SDLIMAGE_JPEG OFF)
+set(SDLIMAGE_WEBP OFF)
+add_subdirectory(extern/sdl_image)
+
 add_subdirectory(extern)
 add_subdirectory(source)
 add_subdirectory(apps)
