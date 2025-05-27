@@ -48,8 +48,9 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[]) {
     }
 
     // create a renderer
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL);
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, nullptr);
     if (not renderer){
+        SDL_GetError();
         return SDL_Fail();
     }
 
