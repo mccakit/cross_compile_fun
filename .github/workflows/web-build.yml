@@ -12,7 +12,7 @@ jobs:
           submodules: recursive
       - name: Get Emscripten
         run: |
-            sudo apt-get emscripten
+            sudo apt-get install emscripten
       - name: Build for web
         run: |
             emcmake cmake -S . -B build
