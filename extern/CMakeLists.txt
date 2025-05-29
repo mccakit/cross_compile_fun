@@ -10,4 +10,4 @@ target_include_directories(imgui PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/imgui
     ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends
 )
-target_link_libraries(imgui PRIVATE SDL3::SDL3-static)
+target_link_libraries(imgui PRIVATE SDL3::SDL3)

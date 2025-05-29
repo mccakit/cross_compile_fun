@@ -6,7 +6,7 @@ target_link_libraries(
         SDL3_ttf::SDL3_ttf
         SDL3_mixer::SDL3_mixer
         SDL3_image::SDL3_image
-        SDL3::SDL3-static
+        SDL3::SDL3
         imgui
 )
 if(EMSCRIPTEN)
