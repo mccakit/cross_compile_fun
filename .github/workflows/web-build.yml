@@ -12,10 +12,7 @@ jobs:
           submodules: recursive
       - name: Get Emscripten
         run: |
-            git clone https://github.com/emscripten-core/emsdk.git --depth=1
-            cd emsdk
-            ./emsdk install tot
-            ./emsdk activate tot
+            sudo apt-get emscripten
       - name: Build for web
         run: |
             emcmake cmake -S . -B build
