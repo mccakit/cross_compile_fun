@@ -1,4 +1,4 @@
 build/
-.gradle/
-.zed/
-.luarc.json/
+.gradle
+.zed
+.luarc.json
