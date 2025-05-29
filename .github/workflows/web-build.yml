@@ -1,6 +1,5 @@
 name: Build Sample For Web
 on: [push, pull_request]
-
 jobs:
   build-web:
     name: Build demo for Web
@@ -25,7 +24,7 @@ jobs:
         run: |
             mv build/apps/foo.html build/apps/index.html
             mkdir _site
-            cp build/apps/* _site/
+            cp -r build/apps/* _site/
       - name: Fix permissions
         run: |
          chmod -c -R +rX "_site/" | while read line; do
@@ -35,22 +34,18 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site/
-
  # Deploy job
   deploy:
     # Add a dependency to the build job
     needs: build-web
-
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
       pages: write      # to deploy to Pages
       id-token: write   # to verify the deployment originates from an appropriate source
-
     # Deploy to the github-pages environment
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
