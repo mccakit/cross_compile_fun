@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 4.0.2)
 project(
-    ModernCMakeExample
-    VERSION 0.1
-    DESCRIPTION "An example project with CMake"
+    CrossFun
+    VERSION 1.0
+    DESCRIPTION "Lmao"
     LANGUAGES C CXX
 )
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 if(NOT ANDROID)
     set(BUILD_SHARED_LIBS OFF)
