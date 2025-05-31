@@ -9,32 +9,45 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+
+      - name: Install CMake 4.0.2
+        run: |
+          wget https://github.com/Kitware/CMake/releases/download/v4.0.2/cmake-4.0.2-linux-x86_64.sh
+          chmod +x cmake-4.0.2-linux-x86_64.sh
+          sudo ./cmake-4.0.2-linux-x86_64.sh --skip-license --prefix=/usr/local
+          cmake --version
+
       - name: Get Emscripten
         run: |
           git clone https://github.com/emscripten-core/emsdk.git --depth=1
           cd emsdk
           ./emsdk install tot
           ./emsdk activate tot
+
       - name: Build for web
         run: |
           source emsdk/emsdk_env.sh
           emcmake cmake -S . -B build
           cmake --build build --parallel
+
       - name: Prepare for upload
         run: |
             mv build/apps/foo.html build/apps/index.html
             mkdir _site
             cp -r build/apps/* _site/
+
       - name: Fix permissions
         run: |
          chmod -c -R +rX "_site/" | while read line; do
            echo "::warning title=Invalid file permissions automatically fixed::$line"
          done
+
       - name: Upload
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site/
- # Deploy job
+
+  # Deploy job
   deploy:
     # Add a dependency to the build job
     needs: build-web
