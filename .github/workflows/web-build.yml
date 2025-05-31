@@ -32,7 +32,7 @@ jobs:
 
       - name: Prepare for upload
         run: |
-            mv build/apps/foo.html build/apps/index.html
+            mv build/apps/main.html build/apps/index.html
             mkdir _site
             cp -r build/apps/* _site/
 

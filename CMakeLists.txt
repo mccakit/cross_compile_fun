@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.31.0)
+cmake_minimum_required(VERSION 4.0.2)
 project(
     ModernCMakeExample
     VERSION 0.1
