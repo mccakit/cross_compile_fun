@@ -16,13 +16,11 @@
 #include "imgui_impl_vulkan.h"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
-#include <SDL3/SDL_init.h>
 #include <SDL3/SDL_vulkan.h>
 #include <SDL3_mixer/SDL_mixer.h>
 #include <stdio.h>  // printf, fprintf
 #include <stdlib.h> // abort
 
-#define DEBUG
 // This example doesn't compile with Emscripten yet! Awaiting SDL3 support.
 #ifdef __EMSCRIPTEN__
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
@@ -103,8 +101,17 @@ uint32_t findMemoryType(uint32_t type_filter, VkMemoryPropertyFlags properties)
 bool LoadTextureFromFile(const char* filename, MyTextureData* tex_data)
 {
     // Specifying 4 channels forces stb to load the image in RGBA which is an easy format for Vulkan
+    size_t file_size = 0;
+    void* file_data = SDL_LoadFile(filename, &file_size);
     tex_data->Channels = 4;
-    unsigned char* image_data = stbi_load(filename, &tex_data->Width, &tex_data->Height, 0, tex_data->Channels);
+    unsigned char* image_data = stbi_load_from_memory(
+        static_cast<const stbi_uc*>(file_data),
+        static_cast<int>(file_size),
+        &tex_data->Width,
+        &tex_data->Height,
+        nullptr,
+        tex_data->Channels
+    );
 
     if (image_data == NULL)
         return false;
@@ -439,7 +446,7 @@ static void SetupVulkan(ImVector<const char *> instance_extensions)
     // If you wish to load e.g. additional textures you may need to alter pools sizes and maxSets.
     {
         VkDescriptorPoolSize pool_sizes[] = {
-            {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, IMGUI_IMPL_VULKAN_MINIMUM_IMAGE_SAMPLER_POOL_SIZE},
+            {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 10},
         };
         VkDescriptorPoolCreateInfo pool_info = {};
         pool_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
@@ -683,7 +690,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
     state.audioDevice = SDL_OpenAudioDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, nullptr);
     Mix_OpenAudio(state.audioDevice, nullptr);
     state.music = Mix_LoadMUS("the_entertainer.ogg");
-    Mix_PlayMusic(state.music, 0);
+    Mix_PlayMusic(state.music, -1);
     return SDL_APP_CONTINUE;
 }
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event* event)
@@ -726,10 +733,24 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     ImGui_ImplSDL3_NewFrame();
     ImGui::NewFrame();
 
+
     ImGui::Begin("Vulkan Texture Test");
-    ImGui::Text("pointer = %p", state.my_texture.DS);
-    ImGui::Text("size = %d x %d", state.my_texture.Width, state.my_texture.Height);
-    ImGui::Image((ImTextureID)state.my_texture.DS, ImVec2(state.my_texture.Width, state.my_texture.Height));
+    ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
+    ImGui::Image((ImTextureID)state.my_texture.DS, ImVec2(480, 480));
+
+    static bool music_playing {true};
+    if (ImGui::Button(music_playing ? "Pause" : "Resume"))
+    {
+        if (music_playing)
+        {
+            Mix_PauseMusic();
+        }
+        else
+        {
+            Mix_ResumeMusic();
+        }
+        music_playing = !music_playing;
+    }
     ImGui::End();
 
     ImGui::Render();

@@ -4,7 +4,7 @@ else()
     add_executable(main main.cpp)
 endif()
 target_compile_definitions(main PUBLIC SDL_MAIN_USE_CALLBACKS)
-set_property(TARGET main PROPERTY WIN32_EXECUTABLE TRUE)
+# set_property(TARGET main PROPERTY WIN32_EXECUTABLE TRUE)
 target_link_libraries(
     main
     PRIVATE
