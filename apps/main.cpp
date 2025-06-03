@@ -1,16 +1,3 @@
-// Learn about Dear ImGui:
-// - FAQ                  https://dearimgui.com/faq
-// - Getting Started      https://dearimgui.com/getting-started
-// - Documentation        https://dearimgui.com/docs (same as your local docs/ folder).
-// - Introduction, links and more at the top of imgui.cpp
-
-// Important note to the reader who wish to integrate imgui_impl_vulkan.cpp/.h in their own engine/app.
-// - Common ImGui_ImplVulkan_XXX functions and structures are used to interface with imgui_impl_vulkan.cpp/.h.
-//   You will use those if you want to use this rendering backend in your engine/app.
-// - Helper ImGui_ImplVulkanH_XXX functions and structures are only used by this example (main.cpp) and by
-//   the backend itself (imgui_impl_vulkan.cpp), but should PROBABLY NOT be used by your own engine/app code.
-// Read comments in imgui_impl_vulkan.h.
-
 #include "imgui.h"
 #include "imgui_impl_sdl3.h"
 #include "imgui_impl_vulkan.h"
@@ -19,27 +6,9 @@
 #include <SDL3/SDL_init.h>
 #include <SDL3/SDL_vulkan.h>
 #include <SDL3_mixer/SDL_mixer.h>
-#include <stdio.h>  // printf, fprintf
-#include <stdlib.h> // abort
+#include <stdio.h>
+#include <stdlib.h>
 
-// This example doesn't compile with Emscripten yet! Awaiting SDL3 support.
-#ifdef __EMSCRIPTEN__
-#include "../libs/emscripten/emscripten_mainloop_stub.h"
-#endif
-
-// Volk headers
-#ifdef IMGUI_IMPL_VULKAN_USE_VOLK
-#define VOLK_IMPLEMENTATION
-#include <volk.h>
-#endif
-
-// #define APP_USE_UNLIMITED_FRAME_RATE
-#ifdef _DEBUG
-#define APP_USE_VULKAN_DEBUG_REPORT
-static VkDebugReportCallbackEXT g_DebugReport = VK_NULL_HANDLE;
-#endif
-
-// Data
 static VkAllocationCallbacks *g_Allocator = nullptr;
 static VkInstance g_Instance = VK_NULL_HANDLE;
 static VkPhysicalDevice g_PhysicalDevice = VK_NULL_HANDLE;
@@ -56,42 +25,31 @@ static bool g_SwapChainRebuild = false;
 static void check_vk_result(VkResult err)
 {
     if (err == VK_SUCCESS)
+    {
         return;
+    }
     fprintf(stderr, "[vulkan] Error: VkResult = %d\n", err);
     if (err < 0)
+    {
         abort();
+    }
 }
-
-#ifdef APP_USE_VULKAN_DEBUG_REPORT
-static VKAPI_ATTR VkBool32 VKAPI_CALL debug_report(VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT objectType,
-                                                   uint64_t object, size_t location, int32_t messageCode,
-                                                   const char *pLayerPrefix, const char *pMessage, void *pUserData)
-{
-    (void)flags;
-    (void)object;
-    (void)location;
-    (void)messageCode;
-    (void)pUserData;
-    (void)pLayerPrefix; // Unused arguments
-    fprintf(stderr, "[vulkan] Debug report from ObjectType: %i\nMessage: %s\n\n", objectType, pMessage);
-    return VK_FALSE;
-}
-#endif // APP_USE_VULKAN_DEBUG_REPORT
 
 static bool IsExtensionAvailable(const ImVector<VkExtensionProperties> &properties, const char *extension)
 {
     for (const VkExtensionProperties &p : properties)
+    {
         if (strcmp(p.extensionName, extension) == 0)
+        {
             return true;
+        }
+    }
     return false;
 }
 
 static void SetupVulkan(ImVector<const char *> instance_extensions)
 {
     VkResult err;
-#ifdef IMGUI_IMPL_VULKAN_USE_VOLK
-    volkInitialize();
-#endif
 
     // Create Vulkan Instance
     {
@@ -108,46 +66,15 @@ static void SetupVulkan(ImVector<const char *> instance_extensions)
 
         // Enable required extensions
         if (IsExtensionAvailable(properties, VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME))
-            instance_extensions.push_back(VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME);
-#ifdef VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME
-        if (IsExtensionAvailable(properties, VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME))
         {
-            instance_extensions.push_back(VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME);
-            create_info.flags |= VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
+            instance_extensions.push_back(VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME);
         }
-#endif
-
-        // Enabling validation layers
-#ifdef APP_USE_VULKAN_DEBUG_REPORT
-        const char *layers[] = {"VK_LAYER_KHRONOS_validation"};
-        create_info.enabledLayerCount = 1;
-        create_info.ppEnabledLayerNames = layers;
-        instance_extensions.push_back("VK_EXT_debug_report");
-#endif
 
         // Create Vulkan Instance
         create_info.enabledExtensionCount = (uint32_t)instance_extensions.Size;
         create_info.ppEnabledExtensionNames = instance_extensions.Data;
         err = vkCreateInstance(&create_info, g_Allocator, &g_Instance);
         check_vk_result(err);
-#ifdef IMGUI_IMPL_VULKAN_USE_VOLK
-        volkLoadInstance(g_Instance);
-#endif
-
-        // Setup the debug report callback
-#ifdef APP_USE_VULKAN_DEBUG_REPORT
-        auto f_vkCreateDebugReportCallbackEXT =
-            (PFN_vkCreateDebugReportCallbackEXT)vkGetInstanceProcAddr(g_Instance, "vkCreateDebugReportCallbackEXT");
-        IM_ASSERT(f_vkCreateDebugReportCallbackEXT != nullptr);
-        VkDebugReportCallbackCreateInfoEXT debug_report_ci = {};
-        debug_report_ci.sType = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT;
-        debug_report_ci.flags = VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT |
-                                VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT;
-        debug_report_ci.pfnCallback = debug_report;
-        debug_report_ci.pUserData = nullptr;
-        err = f_vkCreateDebugReportCallbackEXT(g_Instance, &debug_report_ci, g_Allocator, &g_DebugReport);
-        check_vk_result(err);
-#endif
     }
 
     // Select Physical Device (GPU)
@@ -169,10 +96,6 @@ static void SetupVulkan(ImVector<const char *> instance_extensions)
         vkEnumerateDeviceExtensionProperties(g_PhysicalDevice, nullptr, &properties_count, nullptr);
         properties.resize(properties_count);
         vkEnumerateDeviceExtensionProperties(g_PhysicalDevice, nullptr, &properties_count, properties.Data);
-#ifdef VK_KHR_PORTABILITY_SUBSET_EXTENSION_NAME
-        if (IsExtensionAvailable(properties, VK_KHR_PORTABILITY_SUBSET_EXTENSION_NAME))
-            device_extensions.push_back(VK_KHR_PORTABILITY_SUBSET_EXTENSION_NAME);
-#endif
 
         const float queue_priority[] = {1.0f};
         VkDeviceQueueCreateInfo queue_info[1] = {};
@@ -234,12 +157,7 @@ static void SetupVulkanWindow(ImGui_ImplVulkanH_Window *wd, VkSurfaceKHR surface
                                                               requestSurfaceColorSpace);
 
     // Select Present Mode
-#ifdef APP_USE_UNLIMITED_FRAME_RATE
-    VkPresentModeKHR present_modes[] = {VK_PRESENT_MODE_MAILBOX_KHR, VK_PRESENT_MODE_IMMEDIATE_KHR,
-                                        VK_PRESENT_MODE_FIFO_KHR};
-#else
     VkPresentModeKHR present_modes[] = {VK_PRESENT_MODE_FIFO_KHR};
-#endif
     wd->PresentMode = ImGui_ImplVulkanH_SelectPresentMode(g_PhysicalDevice, wd->Surface, &present_modes[0],
                                                           IM_ARRAYSIZE(present_modes));
     // printf("[vulkan] Selected PresentMode = %d\n", wd->PresentMode);
@@ -253,14 +171,6 @@ static void SetupVulkanWindow(ImGui_ImplVulkanH_Window *wd, VkSurfaceKHR surface
 static void CleanupVulkan()
 {
     vkDestroyDescriptorPool(g_Device, g_DescriptorPool, g_Allocator);
-
-#ifdef APP_USE_VULKAN_DEBUG_REPORT
-    // Remove the debug report callback
-    auto f_vkDestroyDebugReportCallbackEXT =
-        (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(g_Instance, "vkDestroyDebugReportCallbackEXT");
-    f_vkDestroyDebugReportCallbackEXT(g_Instance, g_DebugReport, g_Allocator);
-#endif // APP_USE_VULKAN_DEBUG_REPORT
-
     vkDestroyDevice(g_Device, g_Allocator);
     vkDestroyInstance(g_Instance, g_Allocator);
 }
@@ -351,17 +261,20 @@ static void FramePresent(ImGui_ImplVulkanH_Window *wd)
     info.pImageIndices = &wd->FrameIndex;
     VkResult err = vkQueuePresentKHR(g_Queue, &info);
     if (err == VK_ERROR_OUT_OF_DATE_KHR || err == VK_SUBOPTIMAL_KHR)
+    {
         g_SwapChainRebuild = true;
+    }
     if (err == VK_ERROR_OUT_OF_DATE_KHR)
+    {
         return;
+    }
     if (err != VK_SUBOPTIMAL_KHR)
+    {
         check_vk_result(err);
+    }
     wd->SemaphoreIndex = (wd->SemaphoreIndex + 1) % wd->SemaphoreCount; // Now we can use the next set of semaphores
 }
 
-//-------------------
-//
-//-------------------
 struct app_state
 {
     // init
