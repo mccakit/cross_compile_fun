@@ -1,9 +1,10 @@
-if (ANDROID)
-	add_library(main SHARED main.cpp)
+if(ANDROID)
+    add_library(main SHARED main.cpp)
 else()
-	add_executable(main main.cpp)
+    add_executable(main main.cpp)
 endif()
 target_compile_definitions(main PUBLIC SDL_MAIN_USE_CALLBACKS)
+set_property(TARGET main PROPERTY WIN32_EXECUTABLE TRUE)
 target_link_libraries(
     main
     PRIVATE
@@ -12,6 +13,7 @@ target_link_libraries(
         SDL3_image::SDL3_image
         SDL3::SDL3
         imgui
+        stb
 )
 if(EMSCRIPTEN)
     target_link_libraries(
@@ -29,14 +31,15 @@ macro(copy_helper filename)
         set(outname ${CMAKE_BINARY_DIR}/apps)
     endif()
     add_custom_command(
-        TARGET main POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${CMAKE_CURRENT_LIST_DIR}/${filename}"
-            "${outname}"
+        TARGET main
+        POST_BUILD
+        COMMAND
+            ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_CURRENT_LIST_DIR}/${filename}" "${outname}"
     )
 endmacro()
 if(NOT EMSCRIPTEN)
     copy_helper("Inter-VariableFont.ttf")
     copy_helper("the_entertainer.ogg")
-    copy_helper("gs_tiger.svg")
+    copy_helper("gs_tiger.png")
 endif()

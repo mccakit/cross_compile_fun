@@ -7,14 +7,15 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 30
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
+
         externalNativeBuild {
             cmake {
-                arguments += listOf("-DANDROID_PLATFORM=android-21", "-DANDROID_STL=c++_static")
+                arguments += listOf("-DANDROID_PLATFORM=android-30", "-DANDROID_STL=c++_static")
                 abiFilters += listOf("arm64-v8a")
             }
         }

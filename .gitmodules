@@ -14,3 +14,6 @@
 [submodule "extern/sdl_ttf"]
 	path = extern/sdl_ttf
 	url = git@github.com:libsdl-org/SDL_ttf.git
+[submodule "extern/stb"]
+	path = extern/stb
+	url = git@github.com:nothings/stb.git
