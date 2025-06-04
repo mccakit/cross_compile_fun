@@ -19,28 +19,34 @@ add_subdirectory(sdl_image)
 
 add_library(imgui STATIC)
 file(GLOB imgui_src "${CMAKE_CURRENT_SOURCE_DIR}/imgui/*.cpp")
-if(EMSCRIPTEN)
-    set(imgui_backends
-        "${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_sdl3.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_opengl3.cpp"
-    )
-else()
+
+if(ANDROID)
     set(imgui_backends
         "${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_sdl3.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_vulkan.cpp"
     )
+else()
+    set(imgui_backends
+        "${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_sdl3.cpp"
+        "${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_opengl3.cpp"
+    )
 endif()
 target_sources(imgui PRIVATE ${imgui_src} ${imgui_backends})
-target_include_directories(imgui PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/imgui
-    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends
+target_include_directories(
+    imgui
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/imgui
+        ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends
 )
 target_link_libraries(imgui PRIVATE SDL3::SDL3)
 if(EMSCRIPTEN)
     target_link_options(imgui PUBLIC "-sUSE_WEBGL2=1")
-else()
+elseif(ANDROID)
     find_package(Vulkan REQUIRED)
     target_link_libraries(imgui PUBLIC Vulkan::Vulkan)
+else()
+    find_package(OpenGL REQUIRED)
+    target_link_libraries(imgui PUBLIC OpenGL::GL)
 endif()
 add_library(stb STATIC)
 file(GLOB stb_src stb/*.c)
