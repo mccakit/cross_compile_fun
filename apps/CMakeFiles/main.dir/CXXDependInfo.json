@@ -21,6 +21,7 @@
 		"C:\\dev\\projects\\cross_compile_fun\\extern\\sdl_image\\include",
 		"C:\\dev\\projects\\cross_compile_fun\\extern\\imgui",
 		"C:\\dev\\projects\\cross_compile_fun\\extern\\imgui\\backends",
+		"C:\\dev\\projects\\cross_compile_fun\\extern\\stb",
 		"C:\\VulkanSDK\\1.4.313.1\\include"
 	],
 	"language" : "CXX",
@@ -28,10 +29,10 @@
 	"module-dir" : "C:/dev/projects/cross_compile_fun/build/win-x64/apps/CMakeFiles/main.dir",
 	"sources" : 
 	{
-		"apps/CMakeFiles/main.dir/main.cpp.obj" : 
+		"apps/CMakeFiles/main.dir/main-vulkan.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/dev/projects/cross_compile_fun/apps/main.cpp"
+			"source" : "C:/dev/projects/cross_compile_fun/apps/main-vulkan.cpp"
 		}
 	}
 }

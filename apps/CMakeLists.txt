@@ -1,10 +1,12 @@
 if(ANDROID)
-    add_library(main SHARED main.cpp)
+    add_library(main SHARED main-vulkan.cpp)
+elseif(EMSCRIPTEN)
+    add_executable(main main-opengl.cpp)
 else()
-    add_executable(main main.cpp)
+    add_executable(main main-vulkan.cpp)
 endif()
 target_compile_definitions(main PUBLIC SDL_MAIN_USE_CALLBACKS)
-# set_property(TARGET main PROPERTY WIN32_EXECUTABLE TRUE)
+set_property(TARGET main PROPERTY WIN32_EXECUTABLE TRUE)
 target_link_libraries(
     main
     PRIVATE
@@ -21,7 +23,7 @@ if(EMSCRIPTEN)
         PRIVATE
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/Inter-VariableFont.ttf@/"
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/the_entertainer.ogg@/"
-            "--preload-file ${CMAKE_CURRENT_LIST_DIR}/gs_tiger.svg@/"
+            "--preload-file ${CMAKE_CURRENT_LIST_DIR}/gs_tiger.png@/"
     )
 endif()
 macro(copy_helper filename)

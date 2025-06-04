@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 4.0.2)
+set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API "OFF")
 project(
     CrossFun
     VERSION 1.0

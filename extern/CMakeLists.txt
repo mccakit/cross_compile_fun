@@ -22,7 +22,7 @@ file(GLOB imgui_src "${CMAKE_CURRENT_SOURCE_DIR}/imgui/*.cpp")
 if(EMSCRIPTEN)
     set(imgui_backends
         "${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_sdl3.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_wgpu.cpp"
+        "${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_opengl3.cpp"
     )
 else()
     set(imgui_backends
@@ -36,9 +36,12 @@ target_include_directories(imgui PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends
 )
 target_link_libraries(imgui PRIVATE SDL3::SDL3)
-find_package(Vulkan REQUIRED)
-target_link_libraries(imgui PUBLIC Vulkan::Vulkan)
-
+if(EMSCRIPTEN)
+    target_link_options(imgui PUBLIC "-sUSE_WEBGL2=1")
+else()
+    find_package(Vulkan REQUIRED)
+    target_link_libraries(imgui PUBLIC Vulkan::Vulkan)
+endif()
 add_library(stb STATIC)
 file(GLOB stb_src stb/*.c)
 target_sources(stb PRIVATE ${stb_src})
