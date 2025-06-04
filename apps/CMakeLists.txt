@@ -1,5 +1,6 @@
 if(ANDROID)
-    add_library(main SHARED main-vulkan.cpp)
+    add_library(main SHARED main-opengl.cpp)
+    target_compile_definitions(main PUBLIC IMGUI_IMPL_OPENGL_ES3)
 elseif(EMSCRIPTEN)
     add_executable(main main-opengl.cpp)
     target_compile_definitions(main PUBLIC IMGUI_IMPL_OPENGL_ES3)
