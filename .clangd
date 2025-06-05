@@ -1,2 +1,2 @@
 CompileFlags:
-  CompilationDatabase: build/wasm32
+  CompilationDatabase: build/win-x64

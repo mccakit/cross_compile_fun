@@ -1,13 +1,18 @@
+#include "SDL3/SDL_iostream.h"
+#include "SDL3/SDL_stdinc.h"
 #include "imgui.h"
-#include "imgui_impl_sdl3.h"
 #include "imgui_impl_opengl3.h"
-#include <stdio.h>
+#include "imgui_impl_sdl3.h"
+#include "implot.h"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include <array>
+#include <cmath>
+#include <stdio.h>
 #ifdef IMGUI_IMPL_OPENGL_ES2
-    #include <SDL3/SDL_opengles2.h>
+#include <SDL3/SDL_opengles2.h>
 #else
-    #include <SDL3/SDL_opengl.h>
+#include <SDL3/SDL_opengl.h>
 #endif
 #include <SDL3_mixer/SDL_mixer.h>
 
@@ -16,12 +21,13 @@
 #include "stb_image.h"
 
 // Simple helper function to load an image into a OpenGL texture with common settings
-bool LoadTextureFromMemory(const void* data, size_t data_size, GLuint* out_texture, int* out_width, int* out_height)
+bool LoadTextureFromMemory(const void *data, size_t data_size, GLuint *out_texture, int *out_width, int *out_height)
 {
     // Load from file
     int image_width = 0;
     int image_height = 0;
-    unsigned char* image_data = stbi_load_from_memory((const unsigned char*)data, (int)data_size, &image_width, &image_height, NULL, 4);
+    unsigned char *image_data =
+        stbi_load_from_memory((const unsigned char *)data, (int)data_size, &image_width, &image_height, NULL, 4);
     if (image_data == NULL)
         return false;
     // Create a OpenGL texture identifier
@@ -42,10 +48,10 @@ bool LoadTextureFromMemory(const void* data, size_t data_size, GLuint* out_textu
 }
 
 // Open and read a file using SDL_LoadFile(), then forward to LoadTextureFromMemory()
-bool LoadTextureFromFile(const char* file_name, GLuint* out_texture, int* out_width, int* out_height)
+bool LoadTextureFromFile(const char *file_name, GLuint *out_texture, int *out_width, int *out_height)
 {
     size_t file_size = 0;
-    void* file_data = SDL_LoadFile(file_name, &file_size);
+    void *file_data = SDL_LoadFile(file_name, &file_size);
     if (file_data == NULL)
         return false;
 
@@ -54,58 +60,59 @@ bool LoadTextureFromFile(const char* file_name, GLuint* out_texture, int* out_wi
     return ret;
 }
 
-
 struct app_state
 {
-    SDL_Window* window;
+    SDL_Window *window;
     SDL_WindowFlags window_flags;
     SDL_GLContext gl_context;
     ImGuiIO ioObject;
     ImGuiIO &io = ioObject;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
     SDL_AppResult app_quit = SDL_APP_CONTINUE;
-    //audio
-    SDL_AudioDeviceID audioDevice {};
-    Mix_Music * music {};
-    //img
-    int my_image_width = 0;
-    int my_image_height = 0;
-    GLuint my_image_texture = 0;
+    // audio
+    SDL_AudioDeviceID audioDevice{};
+    Mix_Music *music{};
+    // img
+    int im0_width = 0;
+    int im0_height = 0;
+    GLuint im0_texture = 0;
+    // font
+    ImFont *proggy_clean_36;
 };
 app_state state{};
-SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
+SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD);
 
-    #ifdef IMGUI_IMPL_OPENGL_ES2
-        // GL ES 2.0 + GLSL 100 (WebGL 1.0)
-        const char* glsl_version = "#version 100";
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-    #elif IMGUI_IMPL_OPENGL_ES3
-        // GL ES 3.0 + GLSL 300 es (WebGL 2.0)
-        const char* glsl_version = "#version 300 es";
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-    #elif __APPLE__
-        // GL 3.2 Core + GLSL 150
-        const char* glsl_version = "#version 150";
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG); // Always required on Mac
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
-    #else
-        //OpenGL 4.6
-        const char* glsl_version = "#version 460";
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
-    #endif
+#ifdef IMGUI_IMPL_OPENGL_ES2
+    // GL ES 2.0 + GLSL 100 (WebGL 1.0)
+    const char *glsl_version = "#version 100";
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+#elif IMGUI_IMPL_OPENGL_ES3
+    // GL ES 3.0 + GLSL 300 es (WebGL 2.0)
+    const char *glsl_version = "#version 300 es";
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+#elif __APPLE__
+    // GL 3.2 Core + GLSL 150
+    const char *glsl_version = "#version 150";
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG); // Always required on Mac
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+#else
+    // OpenGL 4.6
+    const char *glsl_version = "#version 460";
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
+#endif
     // Create window with graphics context
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
@@ -120,6 +127,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
     IMGUI_CHECKVERSION();
     // Setup Dear ImGui context
     ImGui::CreateContext();
+    ImPlot::CreateContext();
     state.io = ImGui::GetIO();
     state.io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     state.io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
@@ -129,17 +137,22 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
     ImGui_ImplSDL3_InitForOpenGL(state.window, state.gl_context);
     ImGui_ImplOpenGL3_Init("#version 300 es");
 
-    bool ret = LoadTextureFromFile("gs_tiger.png", &state.my_image_texture, &state.my_image_width, &state.my_image_height);
+    bool ret = LoadTextureFromFile("nameless_deity.png", &state.im0_texture, &state.im0_width, &state.im0_height);
     IM_ASSERT(ret);
 
     state.audioDevice = SDL_OpenAudioDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, nullptr);
     Mix_OpenAudio(state.audioDevice, nullptr);
-    state.music = Mix_LoadMUS("the_entertainer.ogg");
-    Mix_PlayMusic(state.music, -1);
 
+    size_t datasize1{};
+    void *data1{SDL_LoadFile("Roboto_Condensed-Regular.ttf", &datasize1)};
+    state.io.Fonts->AddFontFromMemoryTTF(data1, datasize1, 18);
+
+    size_t datasize2{};
+    void *data2{SDL_LoadFile("Roboto_Condensed-Regular.ttf", &datasize2)};
+    state.proggy_clean_36 = state.io.Fonts->AddFontFromMemoryTTF(data2, datasize2, 36);
     return SDL_APP_CONTINUE;
 }
-SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event* event)
+SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 {
     // Poll and handle events (inputs, window resize, etc.)
     ImGui_ImplSDL3_ProcessEvent(event);
@@ -148,7 +161,7 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event* event)
         state.app_quit = SDL_APP_SUCCESS;
     }
     if (event->type == SDL_EVENT_WINDOW_CLOSE_REQUESTED &&
-        event->window.windowID == SDL_GetWindowID(state.window))  // Use the event parameter
+        event->window.windowID == SDL_GetWindowID(state.window)) // Use the event parameter
     {
         state.app_quit = SDL_APP_SUCCESS;
     }
@@ -168,11 +181,87 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL3_NewFrame();
     ImGui::NewFrame();
-    ImGui::Begin("OpenGL Texture Test");
-    ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
-    ImGui::Image((ImTextureID)(intptr_t)state.my_image_texture, ImVec2(480, 480));
-    static bool music_playing {true};
-    if (ImGui::Button(music_playing ? "Pause" : "Resume"))
+    ImGui::SetNextWindowPos(ImGui::GetMainViewport()->Pos);
+    ImGui::SetNextWindowSize(ImGui::GetMainViewport()->Size);
+    ImGui::Begin("Main", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove);
+
+    static ImVec2 windowSize = ImGui::GetWindowSize();
+
+    ImGui::BeginTable("ImageTable", 3, ImGuiTableFlags_SizingStretchProp);
+    ImGui::TableSetupColumn("Left", ImGuiTableColumnFlags_WidthStretch, 0.1f);
+    ImGui::TableSetupColumn("Center", ImGuiTableColumnFlags_WidthStretch, 0.80f);
+    ImGui::TableSetupColumn("Right", ImGuiTableColumnFlags_WidthStretch, 0.1f);
+
+    ImGui::TableNextRow();
+    ImGui::TableSetColumnIndex(1);
+    ImGui::PushFont(state.proggy_clean_36);
+
+    const char *text1 = "Cross Compile Fun by Mehmet Can Cakit!";
+    float text1_width = ImGui::CalcTextSize(text1).x;
+    ImGui::SetCursorPosX((ImGui::GetWindowWidth() - text1_width) * 0.5f);
+    ImGui::Text("%s", text1);
+
+    const char *text2 = "Made with OpenGL, SDL3, ImGUI and Love";
+    float text2_width = ImGui::CalcTextSize(text2).x;
+    ImGui::SetCursorPosX((ImGui::GetWindowWidth() - text2_width) * 0.5f);
+    ImGui::Text("%s", text2);
+
+    char fps_text[64];
+    snprintf(fps_text, sizeof(fps_text), "FPS: %.1f", ImGui::GetIO().Framerate);
+    float fps_width = ImGui::CalcTextSize(fps_text).x;
+    ImGui::SetCursorPosX((ImGui::GetWindowWidth() - fps_width) * 0.5f);
+    ImGui::Text("%s", fps_text);
+
+    ImGui::PopFont();
+
+    ImGui::TableNextRow();
+    ImGui::TableSetColumnIndex(1);
+    if (ImPlot::BeginPlot("Animated Waves", ImVec2(windowSize.x * 0.8f, 0), ImPlotFlags_NoFrame | ImPlotFlags_NoInputs))
+    {
+        static float time = 0.0f;
+        time += ImGui::GetIO().DeltaTime; // or your own time step
+
+        static std::array<float, 100> x_data;
+        static std::array<float, 100> y_sine;
+        static std::array<float, 100> y_cosine;
+        for (int i = 0; i < 100; ++i)
+        {
+            float x = i * 0.1f;
+            x_data[i] = x;
+            y_sine[i] = std::sin(x + time);      // Phase shift by time
+            y_cosine[i] = std::cos(x + time);    // Phase shift by time
+        }
+
+        ImPlot::PlotLine("Sine", x_data.data(), y_sine.data(), 100);
+        ImPlot::PlotLine("Cosine", x_data.data(), y_cosine.data(), 100);
+        ImPlot::EndPlot();
+    }
+
+    ImGui::TableNextRow();
+    ImGui::TableSetColumnIndex(1);
+    static float aspect_ratio_0 = static_cast<float>(state.im0_width) / static_cast<float>(state.im0_height);
+    ImVec2 image_size_0 = ImVec2(windowSize.x * 0.8f, windowSize.x * 0.8f / aspect_ratio_0);
+    ImGui::Image((ImTextureID)(intptr_t)state.im0_texture, image_size_0);
+
+    ImGui::PushFont(state.proggy_clean_36);
+    ImGui::TableNextRow();
+    ImGui::TableSetColumnIndex(1);
+    if (ImGui::Button("Twisted Garden",ImVec2(windowSize.x * 0.4f, 0)))
+    {
+        state.music = Mix_LoadMUS("twisted_garden.mp3");
+        Mix_PlayMusic(state.music, -1);
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Sky After Rain",ImVec2(windowSize.x * 0.4f, 0)))
+    {
+        state.music = Mix_LoadMUS("sky_after_rain.mp3");
+        Mix_PlayMusic(state.music, -1);
+    }
+
+    ImGui::TableNextRow();
+    ImGui::TableSetColumnIndex(1);
+    static bool music_playing{true};
+    if (ImGui::Button(music_playing ? "Pause" : "Resume", ImVec2(windowSize.x * 0.8f, 0)))
     {
         if (music_playing)
         {
@@ -184,21 +273,26 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         }
         music_playing = !music_playing;
     }
+
+    ImGui::PopFont();
+    ImGui::EndTable();
     ImGui::End();
     ImGui::Render();
     glViewport(0, 0, (int)state.io.DisplaySize.x, (int)state.io.DisplaySize.y);
-    glClearColor(state.clear_color.x * state.clear_color.w, state.clear_color.y * state.clear_color.w, state.clear_color.z * state.clear_color.w, state.clear_color.w);
+    glClearColor(state.clear_color.x * state.clear_color.w, state.clear_color.y * state.clear_color.w,
+                 state.clear_color.z * state.clear_color.w, state.clear_color.w);
     glClear(GL_COLOR_BUFFER_BIT);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     SDL_GL_SwapWindow(state.window);
     return SDL_APP_CONTINUE;
 }
-void SDL_AppQuit(void* appstate, SDL_AppResult result)
+void SDL_AppQuit(void *appstate, SDL_AppResult result)
 {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL3_Shutdown();
 
     ImGui::DestroyContext();
+    ImPlot::DestroyContext();
     SDL_GL_DestroyContext(state.gl_context);
 
     Mix_FadeOutMusic(1000);
