@@ -27,7 +27,7 @@ if(EMSCRIPTEN)
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/Roboto_Condensed-Regular.ttf@/"
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/sky_after_rain.mp3@/"
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/twisted_garden.mp3@/"
-            "--preload-file ${CMAKE_CURRENT_LIST_DIR}/nameless_deity@/"
+            "--preload-file ${CMAKE_CURRENT_LIST_DIR}/nameless_deity@/nameless_deity"
     )
 endif()
 macro(copy_helper filename)

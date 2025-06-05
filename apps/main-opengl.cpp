@@ -274,7 +274,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     ImGui::TableNextRow();
     ImGui::TableSetColumnIndex(1);
-    int frame = static_cast<int>(time/(1.0f/50.0f))%state.gif_data.size();
+    int frame = static_cast<int>(time/(1.0F/50.0f))%state.gif_data.size();
     float aspect_ratio = static_cast<float>(state.gif_data[0].width) / static_cast<float>(state.gif_data[0].height);
     ImVec2 image_size = ImVec2(windowSize.x * 0.8f, windowSize.x * 0.8f / aspect_ratio);
     ImGui::Image((ImTextureID)(intptr_t)state.gif_data[frame].texture, image_size);
