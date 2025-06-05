@@ -8,7 +8,7 @@ else()
     add_executable(main main-opengl.cpp)
 endif()
 target_compile_definitions(main PUBLIC SDL_MAIN_USE_CALLBACKS)
-# set_property(TARGET main PROPERTY WIN32_EXECUTABLE TRUE)
+set_property(TARGET main PROPERTY WIN32_EXECUTABLE TRUE)
 target_link_libraries(
     main
     PRIVATE
@@ -27,6 +27,7 @@ if(EMSCRIPTEN)
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/Roboto_Condensed-Regular.ttf@/"
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/sky_after_rain.mp3@/"
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/twisted_garden.mp3@/"
+            "--preload-file ${CMAKE_CURRENT_LIST_DIR}/nameless_deity@/"
     )
 endif()
 macro(copy_helper filename)
