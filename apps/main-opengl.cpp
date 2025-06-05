@@ -220,7 +220,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
     ImGui::Begin("Main", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove);
 
-    static ImVec2 windowSize = ImGui::GetWindowSize();
+    ImVec2 windowSize = ImGui::GetWindowSize();
     static float time = 0.0f;
     time += ImGui::GetIO().DeltaTime;
 
@@ -233,15 +233,10 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     ImGui::TableSetColumnIndex(1);
     ImGui::PushFont(state.proggy_clean_36);
 
-    const char *text1 = "Cross Compile Fun by Mehmet Can Cakit!";
+    const char *text1 = "Cross Compile Fun!";
     float text1_width = ImGui::CalcTextSize(text1).x;
     ImGui::SetCursorPosX((ImGui::GetWindowWidth() - text1_width) * 0.5f);
     ImGui::Text("%s", text1);
-
-    const char *text2 = "Made with OpenGL, SDL3, ImGUI and Love";
-    float text2_width = ImGui::CalcTextSize(text2).x;
-    ImGui::SetCursorPosX((ImGui::GetWindowWidth() - text2_width) * 0.5f);
-    ImGui::Text("%s", text2);
 
     char fps_text[64];
     snprintf(fps_text, sizeof(fps_text), "FPS: %.1f", ImGui::GetIO().Framerate);
