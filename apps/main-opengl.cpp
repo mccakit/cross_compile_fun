@@ -7,8 +7,12 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <array>
+#include <vector>
 #include <cmath>
-#include <stdio.h>
+#include <cstdio>
+#include <algorithm>
+#include <string>
+
 #ifdef IMGUI_IMPL_OPENGL_ES2
 #include <SDL3/SDL_opengles2.h>
 #else
@@ -19,6 +23,14 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+
+struct ImageData
+{
+    int width = 0;
+    int height = 0;
+    GLuint texture = 0;
+};
+
 
 // Simple helper function to load an image into a OpenGL texture with common settings
 bool LoadTextureFromMemory(const void *data, size_t data_size, GLuint *out_texture, int *out_width, int *out_height)
@@ -78,6 +90,7 @@ struct app_state
     GLuint im0_texture = 0;
     // font
     ImFont *proggy_clean_36;
+    std::vector<ImageData> gif_data ;
 };
 app_state state{};
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
@@ -135,11 +148,33 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     ImGui::StyleColorsDark();
     // Setup Platform/Renderer backends
     ImGui_ImplSDL3_InitForOpenGL(state.window, state.gl_context);
-    ImGui_ImplOpenGL3_Init("#version 300 es");
+    ImGui_ImplOpenGL3_Init(glsl_version);
 
-    bool ret = LoadTextureFromFile("nameless_deity.png", &state.im0_texture, &state.im0_width, &state.im0_height);
-    IM_ASSERT(ret);
+    std::vector <std::string> helper {};
+    const std::string prefix = "707a936ef0d5487fd2bafb1e0954bf27k7Lsiuac7Cdj5qPt-";
+    const std::string base_path = "nameless_deity/";
 
+    for (int i = 0; i < 135; i++)
+    {
+        std::string filename = prefix + std::to_string(i) + ".png";
+        std::string full_path = base_path + filename;
+        size_t file_size;
+        void* file_data = SDL_LoadFile(full_path.c_str(), &file_size);
+        if (file_data) {
+            SDL_free(file_data);
+            helper.push_back(full_path);  // Store full path directly
+        }
+        else
+        {
+            break;
+        }
+    }
+    ImageData image;
+    for(const auto& full_path : helper)
+    {
+        LoadTextureFromFile(full_path.c_str(), &image.texture, &image.width, &image.height);
+        state.gif_data.push_back(image);
+    }
     state.audioDevice = SDL_OpenAudioDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, nullptr);
     Mix_OpenAudio(state.audioDevice, nullptr);
 
@@ -181,11 +216,13 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL3_NewFrame();
     ImGui::NewFrame();
-    ImGui::SetNextWindowPos(ImGui::GetMainViewport()->Pos);
-    ImGui::SetNextWindowSize(ImGui::GetMainViewport()->Size);
+    ImGui::SetNextWindowPos(ImVec2(0, 0));
+    ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
     ImGui::Begin("Main", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove);
 
     static ImVec2 windowSize = ImGui::GetWindowSize();
+    static float time = 0.0f;
+    time += ImGui::GetIO().DeltaTime;
 
     ImGui::BeginTable("ImageTable", 3, ImGuiTableFlags_SizingStretchProp);
     ImGui::TableSetupColumn("Left", ImGuiTableColumnFlags_WidthStretch, 0.1f);
@@ -218,9 +255,6 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     ImGui::TableSetColumnIndex(1);
     if (ImPlot::BeginPlot("Animated Waves", ImVec2(windowSize.x * 0.8f, 0), ImPlotFlags_NoFrame | ImPlotFlags_NoInputs))
     {
-        static float time = 0.0f;
-        time += ImGui::GetIO().DeltaTime; // or your own time step
-
         static std::array<float, 100> x_data;
         static std::array<float, 100> y_sine;
         static std::array<float, 100> y_cosine;
@@ -237,11 +271,13 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         ImPlot::EndPlot();
     }
 
+
     ImGui::TableNextRow();
     ImGui::TableSetColumnIndex(1);
-    static float aspect_ratio_0 = static_cast<float>(state.im0_width) / static_cast<float>(state.im0_height);
-    ImVec2 image_size_0 = ImVec2(windowSize.x * 0.8f, windowSize.x * 0.8f / aspect_ratio_0);
-    ImGui::Image((ImTextureID)(intptr_t)state.im0_texture, image_size_0);
+    int frame = static_cast<int>(time/(1.0f/50.0f))%state.gif_data.size();
+    float aspect_ratio = static_cast<float>(state.gif_data[0].width) / static_cast<float>(state.gif_data[0].height);
+    ImVec2 image_size = ImVec2(windowSize.x * 0.8f, windowSize.x * 0.8f / aspect_ratio);
+    ImGui::Image((ImTextureID)(intptr_t)state.gif_data[frame].texture, image_size);
 
     ImGui::PushFont(state.proggy_clean_36);
     ImGui::TableNextRow();
@@ -278,6 +314,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     ImGui::EndTable();
     ImGui::End();
     ImGui::Render();
+
     glViewport(0, 0, (int)state.io.DisplaySize.x, (int)state.io.DisplaySize.y);
     glClearColor(state.clear_color.x * state.clear_color.w, state.clear_color.y * state.clear_color.w,
                  state.clear_color.z * state.clear_color.w, state.clear_color.w);
