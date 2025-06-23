@@ -1,4 +1,6 @@
+set(HB_HAVE_CORETEXT OFF)
 add_subdirectory(sdl3)
+
 set(SDLTTF_VENDORED ON)
 add_subdirectory(sdl_ttf)
 
