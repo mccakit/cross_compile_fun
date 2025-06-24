@@ -131,7 +131,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
     state.window_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_HIDDEN | SDL_WINDOW_HIGH_PIXEL_DENSITY;
-    state.window = SDL_CreateWindow("Dear ImGui SDL3+OpenGL3 example", 1280, 720, state.window_flags);
+    state.window = SDL_CreateWindow("Dear ImGui SDL3+OpenGL3 example", 625, 1000, state.window_flags);
     state.gl_context = SDL_GL_CreateContext(state.window);
     SDL_GL_MakeCurrent(state.window, state.gl_context);
     SDL_GL_SetSwapInterval(1); // Enable vsync
@@ -260,7 +260,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
             y_sine[i] = std::sin(x + time);      // Phase shift by time
             y_cosine[i] = std::cos(x + time);    // Phase shift by time
         }
-
+        ImPlot::SetupAxesLimits(x_data.front(), x_data.back(), -1.05, 1.05, ImPlotCond_Always);
         ImPlot::PlotLine("Sine", x_data.data(), y_sine.data(), 100);
         ImPlot::PlotLine("Cosine", x_data.data(), y_cosine.data(), 100);
         ImPlot::EndPlot();

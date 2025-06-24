@@ -32,35 +32,15 @@ if(EMSCRIPTEN)
 endif()
 macro(copy_helper filename)
     if(ANDROID)
-        set(outname ${CMAKE_SOURCE_DIR}/gradle/app/src/main/assets)
-    else()
-        set(outname ${CMAKE_BINARY_DIR}/apps)
-    endif()
-    add_custom_command(
-        TARGET main
-        POST_BUILD
-        COMMAND
-            ${CMAKE_COMMAND} -E copy_if_different
-            "${CMAKE_CURRENT_LIST_DIR}/${filename}" "${outname}"
-    )
-endmacro()
-macro(copy_directory_helper foldername)
-    if(ANDROID)
         set(outdir ${CMAKE_SOURCE_DIR}/gradle/app/src/main/assets)
     else()
         set(outdir ${CMAKE_BINARY_DIR}/apps)
     endif()
-    add_custom_command(
-        TARGET main
-        POST_BUILD
-        COMMAND
-            ${CMAKE_COMMAND} -E copy_directory
-            "${CMAKE_CURRENT_LIST_DIR}/${foldername}" "${outdir}/${foldername}"
-    )
+    file(COPY "${CMAKE_CURRENT_LIST_DIR}/${filename}" DESTINATION "${outdir}")
 endmacro()
 if(NOT EMSCRIPTEN)
     copy_helper("Roboto_Condensed-Regular.ttf")
     copy_helper("sky_after_rain.mp3")
     copy_helper("twisted_garden.mp3")
-    copy_directory_helper("nameless_deity")
+    copy_helper("nameless_deity")
 endif()
