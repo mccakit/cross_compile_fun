@@ -1,5 +1,6 @@
 set(CMAKE_SYSTEM_NAME Darwin)
 set(CMAKE_SYSTEM_PROCESSOR arm64)
+
 set(TOOLCHAIN_PREFIX /home/mccakit/osxcross/target/bin/aarch64-apple-darwin24.5)
 set(CMAKE_C_COMPILER ${TOOLCHAIN_PREFIX}-clang)
 set(CMAKE_CXX_COMPILER ${TOOLCHAIN_PREFIX}-clang++)
@@ -8,5 +9,6 @@ set(CMAKE_LINKER ${TOOLCHAIN_PREFIX}-ld)
 set(CMAKE_EXE_LINKER_FLAGS "-fuse-ld=${CMAKE_LINKER}")
 set(CMAKE_SHARED_LINKER_FLAGS "-fuse-ld=${CMAKE_LINKER}")
 set(CMAKE_MODULE_LINKER_FLAGS "-fuse-ld=${CMAKE_LINKER}")
+
 set(CMAKE_OSX_SYSROOT /home/mccakit/osxcross/target/SDK/MacOSX15.5.sdk)
 set(CMAKE_OSX_DEPLOYMENT_TARGET 15.5)
