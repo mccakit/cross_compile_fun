@@ -8,7 +8,13 @@ else()
     add_executable(main main-opengl.cpp)
 endif()
 target_compile_definitions(main PUBLIC SDL_MAIN_USE_CALLBACKS)
-set_property(TARGET main PROPERTY WIN32_EXECUTABLE TRUE)
+if(WIN32)
+    set_property(TARGET main PROPERTY WIN32_EXECUTABLE TRUE)
+elseif(APPLE)
+    set_target_properties(main PROPERTIES MACOSX_BUNDLE TRUE)
+elseif(LINUX)
+    set_property(TARGET main PROPERTY WIN32_EXECUTABLE TRUE)
+endif()
 target_link_libraries(
     main
     PRIVATE
@@ -19,6 +25,7 @@ target_link_libraries(
         stb
         imgui
         implot
+        sdl_load_wrapper
 )
 if(EMSCRIPTEN)
     target_link_libraries(
@@ -33,6 +40,8 @@ endif()
 macro(copy_helper filename)
     if(ANDROID)
         set(outdir ${CMAKE_SOURCE_DIR}/gradle/app/src/main/assets)
+    elseif(APPLE)
+        set(outdir ${CMAKE_BINARY_DIR}/apps/main.app/Contents/Resources)
     else()
         set(outdir ${CMAKE_BINARY_DIR}/apps)
     endif()

@@ -12,6 +12,7 @@
 #include <cstdio>
 #include <algorithm>
 #include <string>
+#include "sdl_load.hpp"
 
 #ifdef IMGUI_IMPL_OPENGL_ES2
 #include <SDL3/SDL_opengles2.h>
@@ -63,7 +64,7 @@ bool LoadTextureFromMemory(const void *data, size_t data_size, GLuint *out_textu
 bool LoadTextureFromFile(const char *file_name, GLuint *out_texture, int *out_width, int *out_height)
 {
     size_t file_size = 0;
-    void *file_data = SDL_LoadFile(file_name, &file_size);
+    void *file_data = SDL_LoadFileWrapper(file_name, &file_size);
     if (file_data == NULL)
         return false;
 
@@ -159,7 +160,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         std::string filename = prefix + std::to_string(i) + ".png";
         std::string full_path = base_path + filename;
         size_t file_size;
-        void* file_data = SDL_LoadFile(full_path.c_str(), &file_size);
+        void* file_data = SDL_LoadFileWrapper(full_path.c_str(), &file_size);
         if (file_data) {
             SDL_free(file_data);
             helper.push_back(full_path);  // Store full path directly
@@ -179,11 +180,11 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     Mix_OpenAudio(state.audioDevice, nullptr);
 
     size_t datasize1{};
-    void *data1{SDL_LoadFile("Roboto_Condensed-Regular.ttf", &datasize1)};
+    void *data1{SDL_LoadFileWrapper("Roboto_Condensed-Regular.ttf", &datasize1)};
     state.io.Fonts->AddFontFromMemoryTTF(data1, datasize1, 18);
 
     size_t datasize2{};
-    void *data2{SDL_LoadFile("Roboto_Condensed-Regular.ttf", &datasize2)};
+    void *data2{SDL_LoadFileWrapper("Roboto_Condensed-Regular.ttf", &datasize2)};
     state.proggy_clean_36 = state.io.Fonts->AddFontFromMemoryTTF(data2, datasize2, 36);
     return SDL_APP_CONTINUE;
 }
