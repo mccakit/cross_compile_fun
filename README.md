@@ -11,6 +11,7 @@
 To build
 
 - WASM32 = C:/dev/toolchains/emsdk/upstream/emscripten/emcmake.py cmake -B build/wasm32 -G Ninja
+- Android-ARM64 = cd gradle; ./gradlew assembleDebug
 - MacOS-ARM64 = wsl; cmake -B build/macos-arm64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/llvm-macos-arm64.cmake"
 - MacOS-X64 = wsl; cmake -B build/macos-x64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/llvm-macos-x64.cmake"
 - Linux-ARM64 = cmake -B build/linux-arm64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/llvm-linux-arm64.cmake"
