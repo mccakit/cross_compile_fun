@@ -8,6 +8,7 @@ else()
     add_executable(main main-opengl.cpp)
 endif()
 target_compile_definitions(main PUBLIC SDL_MAIN_USE_CALLBACKS)
+
 if(WIN32)
     set_property(TARGET main PROPERTY WIN32_EXECUTABLE TRUE)
 elseif(APPLE)
@@ -15,6 +16,7 @@ elseif(APPLE)
 elseif(LINUX)
     set_property(TARGET main PROPERTY WIN32_EXECUTABLE TRUE)
 endif()
+
 target_link_libraries(
     main
     PRIVATE
@@ -53,3 +55,19 @@ if(NOT EMSCRIPTEN)
     copy_helper("twisted_garden.mp3")
     copy_helper("nameless_deity")
 endif()
+install(
+    TARGETS main
+    RUNTIME
+        DESTINATION crossfun.AppDir/usr/bin
+        PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
+)
+install(
+    FILES Roboto_Condensed-Regular.ttf sky_after_rain.mp3 twisted_garden.mp3
+    DESTINATION crossfun.AppDir/usr/bin
+)
+install(DIRECTORY nameless_deity DESTINATION crossfun.AppDir/usr/bin)
+install(
+    FILES appimage/crossfun.desktop appimage/crossfun.png appimage/AppRun
+    DESTINATION crossfun.AppDir
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+)
