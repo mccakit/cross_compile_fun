@@ -86,3 +86,5 @@ Build Instructions
   .. code-block:: console
 
      cmake -B build/win-x64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/llvm-win-x64.cmake"
+---
+iOS will probably never happen—I think Apple is outright hostile to developers. Yes, you can build iOS apps on Linux if you’re determined enough, but you still have to go through their review process, even for non-public apps. Honestly, the juice isn’t worth the squeeze. Supporting iOS means playing along with policies I fundamentally disagree with, and I’m fine giving up that quarter of the potential revenue.
