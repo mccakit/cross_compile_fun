@@ -49,6 +49,7 @@ macro(copy_helper filename)
     endif()
     file(COPY "${CMAKE_CURRENT_LIST_DIR}/${filename}" DESTINATION "${outdir}")
 endmacro()
+
 if(NOT EMSCRIPTEN)
     copy_helper("Roboto_Condensed-Regular.ttf")
     copy_helper("sky_after_rain.mp3")
