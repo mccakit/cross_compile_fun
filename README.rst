@@ -14,6 +14,8 @@ Supported Platforms
 - MacOS ARM64
 - ANDROID ARM64
 - WASM32
+- IOS ARM64(Non tested because VMWare lags so much)
+- IOS-SIM X64(Non tested because VMWare lags so much)
 
 Build Instructions
 ------------------
