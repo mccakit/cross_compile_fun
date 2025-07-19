@@ -51,7 +51,9 @@ bool LoadTextureFromMemory(const void *data, size_t data_size, GLuint *out_textu
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     // Upload pixels into texture
-    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+    #ifndef IMGUI_IMPL_OPENGL_ES2
+        glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+    #endif
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data);
     stbi_image_free(image_data);
     *out_texture = image_texture;
