@@ -88,3 +88,19 @@ Build Instructions
   .. code-block:: console
 
      cmake -B build/win-x64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/llvm-win-x64.cmake"
+
+- **IOS ARM64**
+
+  Configure the build system via WSL with the appropriate toolchain:
+
+  .. code-block:: console
+
+     cmake -B build/ios-arm64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/llvm-ios-arm64.cmake"
+
+- **IOS-SIM x64**
+
+  Similar to ARM64 but targeting x64:
+
+  .. code-block:: console
+
+     cmake -B build/iossim-x64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/llvm-iossim-x64.cmake"
