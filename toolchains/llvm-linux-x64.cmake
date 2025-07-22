@@ -15,4 +15,6 @@ set(CMAKE_ASM_COMPILER /home/mccakit/dev/llvm/bin/clang)
 
 set(CMAKE_SYSROOT /mnt/c/dev/sysroots/debian-x64)
 set(VULKAN_SDK /mnt/c/dev/sysroots/vulkansdk-linux-x86_64-1.4.313.0/1.4.313.0)
-include_directories(/home/mccakit/random-include/linux)
+
+add_compile_options(-cxx-isystem /home/mccakit/dev/libc++/linux-x64/include/c++/v1)
+link_directories(/home/mccakit/dev/libc++/linux-x64/lib)
