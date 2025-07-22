@@ -75,3 +75,11 @@ if(Linux)
         PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
     )
 endif()
+if(WIN32)
+    install(TARGETS main RUNTIME DESTINATION .)
+    install(
+        FILES Roboto_Condensed-Regular.ttf sky_after_rain.mp3 twisted_garden.mp3
+        DESTINATION .
+    )
+    install(DIRECTORY nameless_deity DESTINATION .)
+endif()

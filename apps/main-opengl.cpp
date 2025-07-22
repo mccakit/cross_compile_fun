@@ -6,14 +6,8 @@
 #include "implot.h"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
-#include <array>
-#include <vector>
-#include <cmath>
-#include <cstdio>
-#include <algorithm>
-#include <string>
-#include "sdl_load.hpp"
 
+#include "sdl_load.hpp"
 #ifdef IMGUI_IMPL_OPENGL_ES2
 #include <SDL3/SDL_opengles2.h>
 #else
@@ -24,7 +18,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
-
+import std;
 struct ImageData
 {
     int width = 0;

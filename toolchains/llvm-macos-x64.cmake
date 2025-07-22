@@ -19,9 +19,6 @@ set(CMAKE_OBJC_COMPILER_TARGET ${triple})
 set(CMAKE_OBJCXX_COMPILER clang++)
 set(CMAKE_OBJCXX_COMPILER_TARGET ${triple})
 
-set(CMAKE_OSX_SYSROOT /mnt/c/dev/sysroots/Xcode-beta/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk)
+set(CMAKE_OSX_SYSROOT /mnt/c/dev/sysroots/Xcode/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk)
 set(CMAKE_OSX_DEPLOYMENT_TARGET 14.0)
-include_directories(/home/mccakit/apple-include)
-
-set(QT_HOST_PATH /home/mccakit/dev/qt)
-set(Qt6_DIR /home/mccakit/apple-qt/macos-x64/lib/cmake/Qt6)
+include_directories(/home/mccakit/random-include/macos)
