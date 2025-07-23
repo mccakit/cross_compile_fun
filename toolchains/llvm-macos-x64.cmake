@@ -21,4 +21,6 @@ set(CMAKE_OBJCXX_COMPILER_TARGET ${triple})
 
 set(CMAKE_OSX_SYSROOT /mnt/c/dev/sysroots/Xcode/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk)
 set(CMAKE_OSX_DEPLOYMENT_TARGET 14.0)
-include_directories(/home/mccakit/random-include/macos)
+
+add_compile_options(-nostdinc++ -cxx-isystem /home/mccakit/dev/libc++/macos-x64/include/c++/v1)
+link_directories(/home/mccakit/dev/libc++/macos-x64/lib)
