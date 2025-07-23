@@ -14,7 +14,9 @@ set(CMAKE_MT /home/mccakit/dev/llvm/bin/llvm-mt)
 set(CMAKE_ASM_COMPILER /home/mccakit/dev/llvm/bin/clang)
 
 set(CMAKE_SYSROOT /mnt/c/dev/sysroots/debian-x64)
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(VULKAN_SDK /mnt/c/dev/sysroots/vulkansdk-linux-x86_64-1.4.313.0/1.4.313.0)
 
 add_compile_options(-cxx-isystem /home/mccakit/dev/libc++/linux-x64/include/c++/v1)
 link_directories(/home/mccakit/dev/libc++/linux-x64/lib)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -L/home/mccakit/dev/libc++/linux-x64/lib")
