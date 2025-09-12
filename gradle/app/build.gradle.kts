@@ -4,11 +4,11 @@ plugins {
 
 android {
     namespace = "org.libsdl.app"
-    compileSdk = 35
-
+    compileSdk = 36
+    ndkVersion = "29.0.13599879"
     defaultConfig {
         minSdk = 30
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -40,7 +40,6 @@ android {
         externalNativeBuild {
             cmake {
                 path = file("../../CMakeLists.txt")
-                version = "4.0.2"
             }
         }
     }
