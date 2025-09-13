@@ -1,6 +1,6 @@
 set(CMAKE_SYSTEM_NAME Android)
 set(CMAKE_SYSTEM_PROCESSOR aarch64)
-set(CMAKE_SYSTEM_VERSION 35)
+set(CMAKE_SYSTEM_VERSION 30)
 set(CMAKE_ANDROID_NDK /home/mccakit/dev/android-clt/ndk/29.0.13599879)
 set(CMAKE_ANDROID_STL_TYPE c++_static)
 set(CMAKE_ANDROID_ARCH_ABI arm64-v8a)
@@ -16,15 +16,12 @@ set(CMAKE_MT /home/mccakit/dev/llvm/bin/llvm-mt)
 
 add_compile_options(
     --sysroot=/home/mccakit/dev/android-clt/ndk/29.0.13599879/toolchains/llvm/prebuilt/linux-x86_64/sysroot
-    -resource-dir=/home/mccakit/dev/android-clt/ndk/29.0.13599879/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20
+    -w
+    -L/home/mccakit/dev/android-clt/ndk/29.0.13599879/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/aarch64
 )
+
 add_link_options(
     --sysroot=/home/mccakit/dev/android-clt/ndk/29.0.13599879/toolchains/llvm/prebuilt/linux-x86_64/sysroot
-    -resource-dir=/home/mccakit/dev/android-clt/ndk/29.0.13599879/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20
-)
-add_compile_options(
     -w
-)
-add_link_options(
-    -w
+    -L/home/mccakit/dev/android-clt/ndk/29.0.13599879/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/aarch64
 )
