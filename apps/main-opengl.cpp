@@ -18,11 +18,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
-#include <vector>
-#include <string>
-#include <array>
-#include <cmath>
-#include <cstdio>
+import std;
 
 struct ImageData
 {

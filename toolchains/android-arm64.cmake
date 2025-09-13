@@ -4,7 +4,6 @@ set(CMAKE_SYSTEM_VERSION 30)
 set(CMAKE_ANDROID_NDK /home/mccakit/dev/android-clt/ndk/29.0.13599879)
 set(CMAKE_ANDROID_STL_TYPE c++_static)
 set(CMAKE_ANDROID_ARCH_ABI arm64-v8a)
-set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 
 set(CMAKE_C_COMPILER /home/mccakit/dev/llvm/bin/clang)
 set(CMAKE_CXX_COMPILER /home/mccakit/dev/llvm/bin/clang++)
