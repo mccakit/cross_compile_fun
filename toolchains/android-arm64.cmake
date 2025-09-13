@@ -17,16 +17,21 @@ add_compile_options(
     --sysroot=/home/mccakit/dev/android-clt/ndk/29.0.13599879/toolchains/llvm/prebuilt/linux-x86_64/sysroot
     -w
     -L/home/mccakit/dev/android-clt/ndk/29.0.13599879/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/aarch64
+    -fPIC
 )
 
 add_link_options(
     --sysroot=/home/mccakit/dev/android-clt/ndk/29.0.13599879/toolchains/llvm/prebuilt/linux-x86_64/sysroot
     -w
     -L/home/mccakit/dev/android-clt/ndk/29.0.13599879/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/aarch64
+    -fPIC
 )
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -nostdinc++ -nostdlib++ -isystem /home/mccakit/dev/libcxx/android-arm64/include/c++/v1")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L/home/mccakit/dev/libcxx/android-arm64/lib")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -L/home/mccakit/dev/libcxx/android-arm64/lib")
 link_libraries(libc++abi.a libc++_static.a)
+add_link_options(-Wl,--no-undefined-version)
+add_link_options(-Wl,-u,JNI_OnLoad)
