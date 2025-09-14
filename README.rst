@@ -8,11 +8,11 @@ Supported Platforms
 
 - Windows x64
 - Windows ARM64
-- Linux x64
-- Linux ARM64
+- Debian x64
+- Debian ARM64
 - MacOS x64
 - MacOS ARM64
-- ANDROID ARM64
+- Android ARM64
 - WASM32
 
 Build Instructions
@@ -28,28 +28,30 @@ Build Instructions
 
 - **Android ARM64**
 
-  Build using Gradle in the `gradle` directory:
+  Build using CMake, then package it with gradle:
 
   .. code-block:: console
 
+     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE=toolchains/android-arm64.cmake
+     cmake --build build
      cd gradle
-     ./gradlew assembleDebug
+     gradle assembleDebug
 
 - **MacOS ARM64**
 
-  Configure the build system via WSL with the appropriate toolchain:
+  Just build with CMake:
 
   .. code-block:: console
 
-     cmake -B build/macos-arm64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/llvm-macos-arm64.cmake"
+     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/macos-arm64.cmake"
 
 - **MacOS x64**
 
-  Similar to ARM64 but targeting x64:
+  Similar to ARM64:
 
   .. code-block:: console
 
-     cmake -B build/macos-x64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/llvm-macos-x64.cmake"
+     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/macos-x64.cmake"
 
 - **Linux ARM64**
 
