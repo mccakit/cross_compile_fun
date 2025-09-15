@@ -13,6 +13,11 @@ Supported Platforms
 - Windows ARM64
 - Debian x64
 - Debian ARM64
+- Fedora x64
+- Fedora ARM64
+- OpenSUSE Tumbleweed x64
+- OpenSUSE Tumbleweed ARM64
+- Arch x64
 - MacOS x64
 - MacOS ARM64
 - Android ARM64
