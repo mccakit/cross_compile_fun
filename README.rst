@@ -39,7 +39,7 @@ Build Instructions
 
 - **Android ARM64**
 
-  Build using CMake, then package it with gradle:
+  Build using CMake, then package it with Gradle:
 
   .. code-block:: console
 
@@ -63,6 +63,25 @@ Build Instructions
   .. code-block:: console
 
      cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/macos-x64.cmake"
+
+iOS Builds
+==========
+
+- **iOS ARM64**
+
+  Build for actual iOS devices:
+
+  .. code-block:: console
+
+     cmake -B build/ios-arm64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/ios-arm64.cmake"
+
+- **iOS Simulator x64**
+
+  Build for the iOS Simulator on x64 macOS:
+
+  .. code-block:: console
+
+     cmake -B build/iossim-x64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/iossim-x64.cmake"
 
 Linux Builds
 ============
@@ -134,6 +153,9 @@ Arch
      cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/arch-x64.cmake"
      cmake --install build --prefix build/output
      appimagetool build/output/crossfun.AppDir
+
+Windows Builds
+==============
 
 - **Windows ARM64**
 
