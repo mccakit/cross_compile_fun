@@ -33,6 +33,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -nostdinc++ -nostdlib++ -isystem /home/m
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L/home/mccakit/dev/libcxx/macos-x64/lib")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -L/home/mccakit/dev/libcxx/macos-x64/lib")
 link_libraries(libc++.a libc++abi.a libunwind.a)
+link_libraries(/home/mccakit/dev/sysroots/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a)
 
 add_compile_options(-w -flto=thin)
 add_link_options(-w -flto=thin)
