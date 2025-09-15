@@ -29,5 +29,3 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -nostdinc++ -nostdlib++ -isystem /home/m
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L/home/mccakit/dev/libcxx/android-arm64/lib")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -L/home/mccakit/dev/libcxx/android-arm64/lib")
 link_libraries(libc++abi.a libc++_static.a)
-add_link_options(-Wl,--no-undefined-version)
-add_link_options(-Wl,-u,JNI_OnLoad)
