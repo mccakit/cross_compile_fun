@@ -20,6 +20,8 @@ Supported Platforms
 - Arch x64
 - MacOS x64
 - MacOS ARM64
+- iOS ARM64
+- iOS Simulator x64
 - Android ARM64
 - WASM32
 
