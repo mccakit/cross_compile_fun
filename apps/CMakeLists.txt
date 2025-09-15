@@ -11,11 +11,6 @@ endif()
 target_compile_definitions(main PUBLIC SDL_MAIN_USE_CALLBACKS)
 
 if(ANDROID)
-    target_link_options(
-        main
-        PRIVATE
-            "-Wl,--version-script=/home/mccakit/desktop/projects/cross_compile_fun/gradle/android.export.sym"
-    )
     file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/apps/arm64-v8a")
     add_custom_command(
         TARGET main

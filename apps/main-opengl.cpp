@@ -6,6 +6,7 @@
 #include "implot.h"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include <cstddef>
 
 #include "sdl_load.hpp"
 #ifdef IMGUI_IMPL_OPENGL_ES2
@@ -27,7 +28,6 @@ struct ImageData
     GLuint texture = 0;
 };
 
-
 // Simple helper function to load an image into a OpenGL texture with common settings
 bool LoadTextureFromMemory(const void *data, size_t data_size, GLuint *out_texture, int *out_width, int *out_height)
 {
@@ -45,10 +45,10 @@ bool LoadTextureFromMemory(const void *data, size_t data_size, GLuint *out_textu
     // Setup filtering parameters for display
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // Upload pixels into texture
-    #ifndef IMGUI_IMPL_OPENGL_ES2
-        glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
-    #endif
+// Upload pixels into texture
+#ifndef IMGUI_IMPL_OPENGL_ES2
+    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+#endif
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data);
     stbi_image_free(image_data);
     *out_texture = image_texture;
@@ -81,19 +81,21 @@ struct app_state
     SDL_AppResult app_quit = SDL_APP_CONTINUE;
     // audio
     SDL_AudioDeviceID audioDevice{};
-    Mix_Music *music{};
+    MIX_Mixer *mixer{};
+    MIX_Track *track{};
+    MIX_Audio *audio{};
     // img
     int im0_width = 0;
     int im0_height = 0;
     GLuint im0_texture = 0;
     // font
     ImFont *proggy_clean_36;
-    std::vector<ImageData> gif_data ;
+    std::vector<ImageData> gif_data;
 };
 app_state state{};
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
-    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD);
+    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD | SDL_INIT_AUDIO);
 
 #ifdef IMGUI_IMPL_OPENGL_ES2
     // GL ES 2.0 + GLSL 100 (WebGL 1.0)
@@ -118,7 +120,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 #else
     // OpenGL 3.0
-    const char* glsl_version = "#version 130";
+    const char *glsl_version = "#version 130";
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -148,7 +150,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     ImGui_ImplSDL3_InitForOpenGL(state.window, state.gl_context);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
-    std::vector <std::string> helper {};
+    std::vector<std::string> helper{};
     const std::string prefix = "707a936ef0d5487fd2bafb1e0954bf27k7Lsiuac7Cdj5qPt-";
     const std::string base_path = "nameless_deity/";
 
@@ -157,10 +159,11 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         std::string filename = prefix + std::to_string(i) + ".png";
         std::string full_path = base_path + filename;
         size_t file_size;
-        void* file_data = SDL_LoadFileWrapper(full_path.c_str(), &file_size);
-        if (file_data) {
+        void *file_data = SDL_LoadFileWrapper(full_path.c_str(), &file_size);
+        if (file_data)
+        {
             SDL_free(file_data);
-            helper.push_back(full_path);  // Store full path directly
+            helper.push_back(full_path); // Store full path directly
         }
         else
         {
@@ -168,13 +171,15 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         }
     }
     ImageData image;
-    for(const auto& full_path : helper)
+    for (const auto &full_path : helper)
     {
         LoadTextureFromFile(full_path.c_str(), &image.texture, &image.width, &image.height);
         state.gif_data.push_back(image);
     }
     state.audioDevice = SDL_OpenAudioDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, nullptr);
-    Mix_OpenAudio(state.audioDevice, nullptr);
+    MIX_Init();
+    state.mixer = MIX_CreateMixerDevice(state.audioDevice, nullptr);
+    state.track = MIX_CreateTrack(state.mixer);
 
     size_t datasize1{};
     void *data1{SDL_LoadFileWrapper("Roboto_Condensed-Regular.ttf", &datasize1)};
@@ -255,8 +260,8 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         {
             float x = i * 0.1f;
             x_data[i] = x;
-            y_sine[i] = std::sin(x + time);      // Phase shift by time
-            y_cosine[i] = std::cos(x + time);    // Phase shift by time
+            y_sine[i] = std::sin(x + time);   // Phase shift by time
+            y_cosine[i] = std::cos(x + time); // Phase shift by time
         }
         ImPlot::SetupAxesLimits(x_data.front(), x_data.back(), -1.05, 1.05, ImPlotCond_Always);
         ImPlot::PlotLine("Sine", x_data.data(), y_sine.data(), 100);
@@ -264,10 +269,9 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         ImPlot::EndPlot();
     }
 
-
     ImGui::TableNextRow();
     ImGui::TableSetColumnIndex(1);
-    int frame = static_cast<int>(time/(1.0F/50.0f))%state.gif_data.size();
+    int frame = static_cast<int>(time / (1.0F / 50.0f)) % state.gif_data.size();
     float aspect_ratio = static_cast<float>(state.gif_data[0].width) / static_cast<float>(state.gif_data[0].height);
     ImVec2 image_size = ImVec2(windowSize.x * 0.8f, windowSize.x * 0.8f / aspect_ratio);
     ImGui::Image((ImTextureID)(intptr_t)state.gif_data[frame].texture, image_size);
@@ -275,16 +279,18 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     ImGui::PushFont(state.proggy_clean_36);
     ImGui::TableNextRow();
     ImGui::TableSetColumnIndex(1);
-    if (ImGui::Button("Twisted Garden",ImVec2(windowSize.x * 0.4f, 0)))
+    if (ImGui::Button("Twisted Garden", ImVec2(windowSize.x * 0.4f, 0)))
     {
-        state.music = Mix_LoadMUS("twisted_garden.mp3");
-        Mix_PlayMusic(state.music, -1);
+        state.audio = MIX_LoadAudio(state.mixer, "twisted_garden.mp3", true);
+        MIX_SetTrackAudio(state.track, state.audio);
+        MIX_PlayTrack(state.track, 0);
     }
     ImGui::SameLine();
-    if (ImGui::Button("Sky After Rain",ImVec2(windowSize.x * 0.4f, 0)))
+    if (ImGui::Button("Sky After Rain", ImVec2(windowSize.x * 0.4f, 0)))
     {
-        state.music = Mix_LoadMUS("sky_after_rain.mp3");
-        Mix_PlayMusic(state.music, -1);
+        state.audio = MIX_LoadAudio(state.mixer, "sky_after_rain.mp3", true);
+        MIX_SetTrackAudio(state.track, state.audio);
+        MIX_PlayTrack(state.track, 0);
     }
 
     ImGui::TableNextRow();
@@ -294,11 +300,11 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     {
         if (music_playing)
         {
-            Mix_PauseMusic();
+            MIX_PauseTrack(state.track);
         }
         else
         {
-            Mix_ResumeMusic();
+            MIX_ResumeTrack(state.track);
         }
         music_playing = !music_playing;
     }
@@ -325,10 +331,10 @@ void SDL_AppQuit(void *appstate, SDL_AppResult result)
     ImPlot::DestroyContext();
     SDL_GL_DestroyContext(state.gl_context);
 
-    Mix_FadeOutMusic(1000);
-    Mix_FreeMusic(state.music);
-    Mix_CloseAudio();
     SDL_CloseAudioDevice(state.audioDevice);
+    MIX_DestroyMixer(state.mixer);
+    MIX_DestroyAudio(state.audio);
+    MIX_Quit();
 
     SDL_DestroyWindow(state.window);
     SDL_Quit();

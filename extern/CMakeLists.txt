@@ -1,14 +1,12 @@
 set(HB_HAVE_CORETEXT OFF)
-add_subdirectory(sdl3)
+add_subdirectory(sdl)
 set(SDLTTF_VENDORED ON)
 add_subdirectory(sdl_ttf)
 
 set(SDLMIXER_MIDI_NATIVE OFF)
 set(SDLMIXER_GME OFF)
-set(SDLMIXER_WAVPACK OFF)
-set(SDLMIXER_MOD OFF)
-set(SDLMIXER_OPUS OFF)
 set(SDLMIXER_VENDORED ON)
+set(SDLMIXER_MOD_XMP OFF)
 add_subdirectory(sdl_mixer)
 
 set(SDLIMAGE_VENDORED ON)
