@@ -1,10 +1,13 @@
+##########################################
 Current Platforms and Build Instructions
-=======================================
+##########################################
 
-This project supports building on multiple platforms. Below are the supported platforms and their respective build commands.
+This project supports building on multiple platforms. Below are the
+supported platforms and their respective build commands.
 
+*********************
 Supported Platforms
--------------------
+*********************
 
 - Windows x64
 - Windows ARM64
@@ -15,8 +18,9 @@ Supported Platforms
 - Android ARM64
 - WASM32
 
+********************
 Build Instructions
-------------------
+********************
 
 - **WASM32**
 
@@ -53,25 +57,76 @@ Build Instructions
 
      cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/macos-x64.cmake"
 
-- **Linux ARM64**
+Linux Builds
+============
 
-  Configure, install, and create an AppImage:
+Debian
+------
 
-  .. code-block:: console
-
-     cmake -B build/linux-arm64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/llvm-linux-arm64.cmake"
-     cmake --install build/linux-arm64 --prefix build/linux-arm64/output
-     wsl; appimagetool build/linux-arm64/output/crossfun.AppDir
-
-- **Linux x64**
-
-  Same steps as Linux ARM64 but for x64:
+- **ARM64**
 
   .. code-block:: console
 
-     cmake -B build/linux-x64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/llvm-linux-x64.cmake"
-     cmake --install build/linux-x64 --prefix build/linux-x64/output
-     wsl; appimagetool build/linux-x64/output/crossfun.AppDir
+     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/debian-arm64.cmake"
+     cmake --install build --prefix build/output
+     appimagetool build/output/crossfun.AppDir
+
+- **x64**
+
+  .. code-block:: console
+
+     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/debian-x64.cmake"
+     cmake --install build --prefix build/output
+     appimagetool build/output/crossfun.AppDir
+
+Fedora
+------
+
+- **ARM64**
+
+  .. code-block:: console
+
+     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/fedora-arm64.cmake"
+     cmake --install build --prefix build/output
+     appimagetool build/output/crossfun.AppDir
+
+- **x64**
+
+  .. code-block:: console
+
+     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/fedora-x64.cmake"
+     cmake --install build --prefix build/output
+     appimagetool build/output/crossfun.AppDir
+
+OpenSUSE Tumbleweed
+-------------------
+
+- **ARM64**
+
+  .. code-block:: console
+
+     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/opensuse-tumbleweed-arm64.cmake"
+     cmake --install build --prefix build/output
+     appimagetool build/output/crossfun.AppDir
+
+- **x64**
+
+  .. code-block:: console
+
+     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/opensuse-tumbleweed-x64.cmake"
+     cmake --install build --prefix build/output
+     appimagetool build/output/crossfun.AppDir
+
+Arch
+----
+
+- **x64 only**
+
+  .. code-block:: console
+
+     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/arch-x64.cmake"
+     cmake --install build --prefix build/output
+     appimagetool build/output/crossfun.AppDir
 
 - **Windows ARM64**
 
