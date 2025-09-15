@@ -22,12 +22,17 @@ include_directories("/home/mccakit/dev/sysroots/msvc-wine/kits/10/include/10.0.2
 include_directories("/home/mccakit/dev/sysroots/msvc-wine/kits/10/include/10.0.26100.0/ucrt")
 include_directories("/home/mccakit/dev/sysroots/msvc-wine/kits/10/include/10.0.26100.0/winrt")
 include_directories("/home/mccakit/dev/sysroots/msvc-wine/vc/tools/msvc/14.44.35207/include")
-
-add_compile_options(-w -flto=thin)
-add_link_options(-w -flto=thin)
+set(CMAKE_FIND_ROOT_PATH /home/mccakit/dev/sysroots/msvc-wine)
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -nostdinc++ -nostdlib++ -isystem /home/mccakit/dev/libcxx/windows-x64/include/c++/v1")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L/home/mccakit/dev/libcxx/windows-x64/lib")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -L/home/mccakit/dev/libcxx/windows-x64/lib")
 link_libraries(libc++.lib)
 add_compile_definitions(_CRT_STDIO_ISO_WIDE_SPECIFIERS=1)
+
+add_compile_options(-w -flto=thin)
+add_link_options(-w -flto=thin)
