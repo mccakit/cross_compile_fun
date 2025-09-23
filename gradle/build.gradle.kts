@@ -17,5 +17,5 @@ tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
 tasks.wrapper {
-    gradleVersion = "8.11.1"
+    gradleVersion = "9.1.0"
 }
