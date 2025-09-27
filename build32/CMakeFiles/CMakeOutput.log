@@ -1,0 +1,117 @@
+Determining size of int16_t passed with the following output:
+Change Dir: '/home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): /home/mccakit/dev/ninja/bin/ninja -v cmTC_b3d69
+[1/2] /home/mccakit/dev/emscripten/emcc -c /home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CheckTypeSize/INT16_SIZE.c   -w -MD -MT CMakeFiles/cmTC_b3d69.dir/INT16_SIZE.c.o -MF CMakeFiles/cmTC_b3d69.dir/INT16_SIZE.c.o.d -o CMakeFiles/cmTC_b3d69.dir/INT16_SIZE.c.o -fPIC
+[2/2] : && /home/mccakit/dev/emscripten/emcc  -w CMakeFiles/cmTC_b3d69.dir/INT16_SIZE.c.o -o cmTC_b3d69.js  --oformat=wasm  -sWASM=1 && :
+
+
+
+Determining size of uint16_t passed with the following output:
+Change Dir: '/home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): /home/mccakit/dev/ninja/bin/ninja -v cmTC_37fc2
+[1/2] /home/mccakit/dev/emscripten/emcc -c /home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CheckTypeSize/UINT16_SIZE.c   -w -MD -MT CMakeFiles/cmTC_37fc2.dir/UINT16_SIZE.c.o -MF CMakeFiles/cmTC_37fc2.dir/UINT16_SIZE.c.o.d -o CMakeFiles/cmTC_37fc2.dir/UINT16_SIZE.c.o -fPIC
+[2/2] : && /home/mccakit/dev/emscripten/emcc  -w CMakeFiles/cmTC_37fc2.dir/UINT16_SIZE.c.o -o cmTC_37fc2.js  --oformat=wasm  -sWASM=1 && :
+
+
+
+Determining size of u_int16_t passed with the following output:
+Change Dir: '/home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): /home/mccakit/dev/ninja/bin/ninja -v cmTC_bd8e1
+[1/2] /home/mccakit/dev/emscripten/emcc -c /home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CheckTypeSize/U_INT16_SIZE.c   -w -MD -MT CMakeFiles/cmTC_bd8e1.dir/U_INT16_SIZE.c.o -MF CMakeFiles/cmTC_bd8e1.dir/U_INT16_SIZE.c.o.d -o CMakeFiles/cmTC_bd8e1.dir/U_INT16_SIZE.c.o -fPIC
+[2/2] : && /home/mccakit/dev/emscripten/emcc  -w CMakeFiles/cmTC_bd8e1.dir/U_INT16_SIZE.c.o -o cmTC_bd8e1.js  --oformat=wasm  -sWASM=1 && :
+
+
+
+Determining size of int32_t passed with the following output:
+Change Dir: '/home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): /home/mccakit/dev/ninja/bin/ninja -v cmTC_dea73
+[1/2] /home/mccakit/dev/emscripten/emcc -c /home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CheckTypeSize/INT32_SIZE.c   -w -MD -MT CMakeFiles/cmTC_dea73.dir/INT32_SIZE.c.o -MF CMakeFiles/cmTC_dea73.dir/INT32_SIZE.c.o.d -o CMakeFiles/cmTC_dea73.dir/INT32_SIZE.c.o -fPIC
+[2/2] : && /home/mccakit/dev/emscripten/emcc  -w CMakeFiles/cmTC_dea73.dir/INT32_SIZE.c.o -o cmTC_dea73.js  --oformat=wasm  -sWASM=1 && :
+
+
+
+Determining size of uint32_t passed with the following output:
+Change Dir: '/home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): /home/mccakit/dev/ninja/bin/ninja -v cmTC_4a31c
+[1/2] /home/mccakit/dev/emscripten/emcc -c /home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CheckTypeSize/UINT32_SIZE.c   -w -MD -MT CMakeFiles/cmTC_4a31c.dir/UINT32_SIZE.c.o -MF CMakeFiles/cmTC_4a31c.dir/UINT32_SIZE.c.o.d -o CMakeFiles/cmTC_4a31c.dir/UINT32_SIZE.c.o -fPIC
+[2/2] : && /home/mccakit/dev/emscripten/emcc  -w CMakeFiles/cmTC_4a31c.dir/UINT32_SIZE.c.o -o cmTC_4a31c.js  --oformat=wasm  -sWASM=1 && :
+
+
+
+Determining size of u_int32_t passed with the following output:
+Change Dir: '/home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): /home/mccakit/dev/ninja/bin/ninja -v cmTC_8a4b2
+[1/2] /home/mccakit/dev/emscripten/emcc -c /home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CheckTypeSize/U_INT32_SIZE.c   -w -MD -MT CMakeFiles/cmTC_8a4b2.dir/U_INT32_SIZE.c.o -MF CMakeFiles/cmTC_8a4b2.dir/U_INT32_SIZE.c.o.d -o CMakeFiles/cmTC_8a4b2.dir/U_INT32_SIZE.c.o -fPIC
+[2/2] : && /home/mccakit/dev/emscripten/emcc  -w CMakeFiles/cmTC_8a4b2.dir/U_INT32_SIZE.c.o -o cmTC_8a4b2.js  --oformat=wasm  -sWASM=1 && :
+
+
+
+Determining size of int64_t passed with the following output:
+Change Dir: '/home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): /home/mccakit/dev/ninja/bin/ninja -v cmTC_61bb3
+[1/2] /home/mccakit/dev/emscripten/emcc -c /home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CheckTypeSize/INT64_SIZE.c   -w -MD -MT CMakeFiles/cmTC_61bb3.dir/INT64_SIZE.c.o -MF CMakeFiles/cmTC_61bb3.dir/INT64_SIZE.c.o.d -o CMakeFiles/cmTC_61bb3.dir/INT64_SIZE.c.o -fPIC
+[2/2] : && /home/mccakit/dev/emscripten/emcc  -w CMakeFiles/cmTC_61bb3.dir/INT64_SIZE.c.o -o cmTC_61bb3.js  --oformat=wasm  -sWASM=1 && :
+
+
+
+Determining size of short passed with the following output:
+Change Dir: '/home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): /home/mccakit/dev/ninja/bin/ninja -v cmTC_57a53
+[1/2] /home/mccakit/dev/emscripten/emcc -c /home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CheckTypeSize/SHORT_SIZE.c   -w -MD -MT CMakeFiles/cmTC_57a53.dir/SHORT_SIZE.c.o -MF CMakeFiles/cmTC_57a53.dir/SHORT_SIZE.c.o.d -o CMakeFiles/cmTC_57a53.dir/SHORT_SIZE.c.o -fPIC
+[2/2] : && /home/mccakit/dev/emscripten/emcc  -w CMakeFiles/cmTC_57a53.dir/SHORT_SIZE.c.o -o cmTC_57a53.js  --oformat=wasm  -sWASM=1 && :
+
+
+
+Determining size of int passed with the following output:
+Change Dir: '/home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): /home/mccakit/dev/ninja/bin/ninja -v cmTC_80778
+[1/2] /home/mccakit/dev/emscripten/emcc -c /home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CheckTypeSize/INT_SIZE.c   -w -MD -MT CMakeFiles/cmTC_80778.dir/INT_SIZE.c.o -MF CMakeFiles/cmTC_80778.dir/INT_SIZE.c.o.d -o CMakeFiles/cmTC_80778.dir/INT_SIZE.c.o -fPIC
+[2/2] : && /home/mccakit/dev/emscripten/emcc  -w CMakeFiles/cmTC_80778.dir/INT_SIZE.c.o -o cmTC_80778.js  --oformat=wasm  -sWASM=1 && :
+
+
+
+Determining size of long passed with the following output:
+Change Dir: '/home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): /home/mccakit/dev/ninja/bin/ninja -v cmTC_b6445
+[1/2] /home/mccakit/dev/emscripten/emcc -c /home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CheckTypeSize/LONG_SIZE.c   -w -MD -MT CMakeFiles/cmTC_b6445.dir/LONG_SIZE.c.o -MF CMakeFiles/cmTC_b6445.dir/LONG_SIZE.c.o.d -o CMakeFiles/cmTC_b6445.dir/LONG_SIZE.c.o -fPIC
+[2/2] : && /home/mccakit/dev/emscripten/emcc  -w CMakeFiles/cmTC_b6445.dir/LONG_SIZE.c.o -o cmTC_b6445.js  --oformat=wasm  -sWASM=1 && :
+
+
+
+Determining size of long long passed with the following output:
+Change Dir: '/home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): /home/mccakit/dev/ninja/bin/ninja -v cmTC_36e4e
+[1/2] /home/mccakit/dev/emscripten/emcc -c /home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CheckTypeSize/LONG_LONG_SIZE.c   -w -MD -MT CMakeFiles/cmTC_36e4e.dir/LONG_LONG_SIZE.c.o -MF CMakeFiles/cmTC_36e4e.dir/LONG_LONG_SIZE.c.o.d -o CMakeFiles/cmTC_36e4e.dir/LONG_LONG_SIZE.c.o -fPIC
+[2/2] : && /home/mccakit/dev/emscripten/emcc  -w CMakeFiles/cmTC_36e4e.dir/LONG_LONG_SIZE.c.o -o cmTC_36e4e.js  --oformat=wasm  -sWASM=1 && :
+
+
+
+Determining size of off_t passed with the following output:
+Change Dir: '/home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): /home/mccakit/dev/ninja/bin/ninja -v cmTC_b7be1
+[1/2] /home/mccakit/dev/emscripten/emcc -c /home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CheckTypeSize/SIZEOF_OFF_T.c   -std=gnu23 -w -MD -MT CMakeFiles/cmTC_b7be1.dir/SIZEOF_OFF_T.c.o -MF CMakeFiles/cmTC_b7be1.dir/SIZEOF_OFF_T.c.o.d -o CMakeFiles/cmTC_b7be1.dir/SIZEOF_OFF_T.c.o -fPIC
+[2/2] : && /home/mccakit/dev/emscripten/emcc  -w CMakeFiles/cmTC_b7be1.dir/SIZEOF_OFF_T.c.o -o cmTC_b7be1.js  -lm  --oformat=wasm  -sWASM=1 && :
+
+
+
+Determining size of size_t passed with the following output:
+Change Dir: '/home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CMakeTmp'
+
+Run Build Command(s): /home/mccakit/dev/ninja/bin/ninja -v cmTC_293a3
+[1/2] /home/mccakit/dev/emscripten/emcc -c /home/mccakit/desktop/cross_compile_fun/build32/CMakeFiles/CheckTypeSize/SIZEOF_SIZE_T.c   -Wall -Winline -Wformat-security -Wpointer-arith -Wdisabled-optimization -Wno-unknown-pragmas -fstrict-aliasing  -std=gnu99 -w -MD -MT CMakeFiles/cmTC_293a3.dir/SIZEOF_SIZE_T.c.o -MF CMakeFiles/cmTC_293a3.dir/SIZEOF_SIZE_T.c.o.d -o CMakeFiles/cmTC_293a3.dir/SIZEOF_SIZE_T.c.o -fPIC
+[2/2] : && /home/mccakit/dev/emscripten/emcc -Wall -Winline -Wformat-security -Wpointer-arith -Wdisabled-optimization -Wno-unknown-pragmas -fstrict-aliasing -w CMakeFiles/cmTC_293a3.dir/SIZEOF_SIZE_T.c.o -o cmTC_293a3.js  --oformat=wasm  -sWASM=1 && :
+
+
+

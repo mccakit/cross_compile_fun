@@ -1,0 +1,32 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "Clang",
+	"compiler-simulate-id" : "",
+	"config" : "RELEASE",
+	"cxx-modules" : {},
+	"database-info" : null,
+	"dir-cur-bld" : "/home/mccakit/desktop/cross_compile_fun/build32/source",
+	"dir-cur-src" : "/home/mccakit/desktop/cross_compile_fun/source",
+	"dir-top-bld" : "/home/mccakit/desktop/cross_compile_fun/build32",
+	"dir-top-src" : "/home/mccakit/desktop/cross_compile_fun",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"/home/mccakit/desktop/cross_compile_fun/include",
+		"extern/sdl/include-revision",
+		"/home/mccakit/desktop/cross_compile_fun/extern/sdl/include"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "/home/mccakit/desktop/cross_compile_fun/build32/source/CMakeFiles/sdl_load_wrapper.dir",
+	"sources" : 
+	{
+		"source/CMakeFiles/sdl_load_wrapper.dir/sdl_load.cpp.o" : 
+		{
+			"language" : "CXX",
+			"source" : "/home/mccakit/desktop/cross_compile_fun/source/sdl_load.cpp"
+		}
+	}
+}

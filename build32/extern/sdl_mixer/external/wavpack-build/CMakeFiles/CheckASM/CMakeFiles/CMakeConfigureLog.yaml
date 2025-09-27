@@ -1,0 +1,1207 @@
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
+      - "CMakeLists.txt:13 (project)"
+    mode: "program"
+    variable: "CMAKE_UNAME"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "uname"
+    candidate_directories:
+      - "/home/mccakit/dev/gradle/bin/"
+      - "/home/mccakit/dev/ninja/bin/"
+      - "/home/mccakit/dev/cmake/bin/"
+      - "/home/mccakit/dev/android-clt/platform-tools/"
+      - "/home/mccakit/dev/llvm/bin/"
+      - "/home/mccakit/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+    searched_directories:
+      - "/home/mccakit/dev/gradle/bin/uname"
+      - "/home/mccakit/dev/ninja/bin/uname"
+      - "/home/mccakit/dev/cmake/bin/uname"
+      - "/home/mccakit/dev/android-clt/platform-tools/uname"
+      - "/home/mccakit/dev/llvm/bin/uname"
+      - "/home/mccakit/.local/bin/uname"
+      - "/usr/local/sbin/uname"
+      - "/usr/local/bin/uname"
+      - "/usr/sbin/uname"
+    found: "/usr/bin/uname"
+    search_context:
+      ENV{PATH}:
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/mccakit/dev/emscripten/cmake/Modules/Platform/Emscripten.cmake:370 (find_program)"
+      - "/home/mccakit/desktop/cross_compile_fun/toolchains/emcc-wasm32.cmake:1 (include)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineSystem.cmake:146 (include)"
+      - "CMakeLists.txt:13 (project)"
+    mode: "program"
+    variable: "NODE_JS_EXECUTABLE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "nodejs"
+      - "node"
+    candidate_directories:
+      - "/home/mccakit/dev/gradle/bin/"
+      - "/home/mccakit/dev/ninja/bin/"
+      - "/home/mccakit/dev/cmake/bin/"
+      - "/home/mccakit/dev/android-clt/platform-tools/"
+      - "/home/mccakit/dev/llvm/bin/"
+      - "/home/mccakit/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+      - "/bin/"
+      - "/sbin/"
+    searched_directories:
+      - "/home/mccakit/dev/gradle/bin/nodejs"
+      - "/home/mccakit/dev/ninja/bin/nodejs"
+      - "/home/mccakit/dev/cmake/bin/nodejs"
+      - "/home/mccakit/dev/android-clt/platform-tools/nodejs"
+      - "/home/mccakit/dev/llvm/bin/nodejs"
+      - "/home/mccakit/.local/bin/nodejs"
+      - "/usr/local/sbin/nodejs"
+      - "/usr/local/bin/nodejs"
+      - "/usr/sbin/nodejs"
+    found: "/usr/bin/nodejs"
+    search_context:
+      ENV{PATH}:
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "/home/mccakit/dev/emscripten/cache/sysroot"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineSystem.cmake:207 (message)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      The target system is: Emscripten - 1 - x86
+      The host system is: Linux - 6.8.0-84-generic - x86_64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompiler.cmake:54 (find_program)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:61 (_cmake_find_compiler)"
+      - "CMakeLists.txt:13 (project)"
+    mode: "program"
+    variable: "CMAKE_ASM_COMPILER"
+    description: "ASM compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "/home/mccakit/dev/emscripten/emcc"
+    candidate_directories:
+      - "/home/mccakit/dev/emscripten/"
+    found: "/home/mccakit/dev/emscripten/emcc"
+    search_context:
+      ENV{PATH}:
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "/home/mccakit/dev/emscripten/cache/sysroot;/home/mccakit/dev/emscripten/cache/sysroot"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is GNU using "--version" did not match "(GNU assembler)|(GCC)|(Free Software Foundation)":
+      emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.16-git (70b187632680b8f98ccd951b5fea0e0c8a72e222)
+      Copyright (C) 2025 the Emscripten authors (see AUTHORS.txt)
+      This is free and open source software under the MIT license.
+      There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is AppleClang using "--version" did not match "(Apple (clang|LLVM) version)":
+      emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.16-git (70b187632680b8f98ccd951b5fea0e0c8a72e222)
+      Copyright (C) 2025 the Emscripten authors (see AUTHORS.txt)
+      This is free and open source software under the MIT license.
+      There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is Clang using "--version" did not match "(clang version)":
+      emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.16-git (70b187632680b8f98ccd951b5fea0e0c8a72e222)
+      Copyright (C) 2025 the Emscripten authors (see AUTHORS.txt)
+      This is free and open source software under the MIT license.
+      There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is ARMClang using "--version" did not match "armclang":
+      emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.16-git (70b187632680b8f98ccd951b5fea0e0c8a72e222)
+      Copyright (C) 2025 the Emscripten authors (see AUTHORS.txt)
+      This is free and open source software under the MIT license.
+      There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is OrangeC using "--version" did not match "occ \\(OrangeC\\) Version":
+      emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.16-git (70b187632680b8f98ccd951b5fea0e0c8a72e222)
+      Copyright (C) 2025 the Emscripten authors (see AUTHORS.txt)
+      This is free and open source software under the MIT license.
+      There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is HP using "-V" did not match "HP C":
+      emcc: error: no input files
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is Intel using "--version" did not match "(ICC)":
+      emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.16-git (70b187632680b8f98ccd951b5fea0e0c8a72e222)
+      Copyright (C) 2025 the Emscripten authors (see AUTHORS.txt)
+      This is free and open source software under the MIT license.
+      There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is IntelLLVM using "--version" did not match "(Intel[^
+      ]+oneAPI)":
+      emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.16-git (70b187632680b8f98ccd951b5fea0e0c8a72e222)
+      Copyright (C) 2025 the Emscripten authors (see AUTHORS.txt)
+      This is free and open source software under the MIT license.
+      There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is SunPro using "-V" did not match "Sun C":
+      emcc: error: no input files
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is XL using "-qversion" did not match "XL C":
+      emcc: error: no input files
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is MSVC using "-?" did not match "Microsoft.*Macro Assembler":
+      emcc: error: no input files
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is TI using "-h" did not match "Texas Instruments":
+      emcc: error: no input files
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is TIClang using "--version" did not match "(TI (.*) Clang Compiler)":
+      emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.16-git (70b187632680b8f98ccd951b5fea0e0c8a72e222)
+      Copyright (C) 2025 the Emscripten authors (see AUTHORS.txt)
+      This is free and open source software under the MIT license.
+      There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is IAR using "" did not match "IAR Assembler":
+      emcc: error: no input files
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is Diab using "-V" did not match "Wind River Systems":
+      emcc: error: no input files
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is ARMCC using "" did not match "(ARM Compiler)|(ARM Assembler)|(Arm Compiler)":
+      emcc: error: no input files
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is NASM using "-v" did not match "(NASM version)":
+      emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.16-git (70b187632680b8f98ccd951b5fea0e0c8a72e222)
+      clang version 22.0.0git (git@github.com:mccakit/llvm-project.git b68e6f614dd6c44f2f28d104c0dadeb29480f917)
+      Target: wasm32-unknown-emscripten
+      Thread model: posix
+      InstalledDir: /home/mccakit/dev/llvm/bin
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is YASM using "--version" did not match "(yasm)":
+      emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.16-git (70b187632680b8f98ccd951b5fea0e0c8a72e222)
+      Copyright (C) 2025 the Emscripten authors (see AUTHORS.txt)
+      This is free and open source software under the MIT license.
+      There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is ADSP using "-version" did not match "Analog Devices":
+      emcc: error: no input files
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is QCC using "-V" did not match "gcc_nto":
+      emcc: error: no input files
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is Tasking using "--version" did not match "TASKING":
+      emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.16-git (70b187632680b8f98ccd951b5fea0e0c8a72e222)
+      Copyright (C) 2025 the Emscripten authors (see AUTHORS.txt)
+      This is free and open source software under the MIT license.
+      There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1303 (message)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:170 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:13 (project)"
+    message: |
+      Checking whether the ASM compiler is Renesas using "-v" did not match "(RX Family C/C\\+\\+ Compiler)|(RL78 Family Compiler)|(RH850 Family Compiler)":
+      emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 4.0.16-git (70b187632680b8f98ccd951b5fea0e0c8a72e222)
+      clang version 22.0.0git (git@github.com:mccakit/llvm-project.git b68e6f614dd6c44f2f28d104c0dadeb29480f917)
+      Target: wasm32-unknown-emscripten
+      Thread model: posix
+      InstalledDir: /home/mccakit/dev/llvm/bin
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "CMakeLists.txt:13 (project)"
+    mode: "program"
+    variable: "CMAKE_STRIP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "strip"
+    candidate_directories:
+      - "/home/mccakit/dev/emscripten/"
+      - "/home/mccakit/dev/gradle/bin/"
+      - "/home/mccakit/dev/ninja/bin/"
+      - "/home/mccakit/dev/cmake/bin/"
+      - "/home/mccakit/dev/android-clt/platform-tools/"
+      - "/home/mccakit/dev/llvm/bin/"
+      - "/home/mccakit/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+      - "/bin/"
+      - "/sbin/"
+    searched_directories:
+      - "/home/mccakit/dev/emscripten/strip"
+      - "/home/mccakit/dev/gradle/bin/strip"
+      - "/home/mccakit/dev/ninja/bin/strip"
+      - "/home/mccakit/dev/cmake/bin/strip"
+      - "/home/mccakit/dev/android-clt/platform-tools/strip"
+      - "/home/mccakit/dev/llvm/bin/strip"
+      - "/home/mccakit/.local/bin/strip"
+      - "/usr/local/sbin/strip"
+      - "/usr/local/bin/strip"
+      - "/usr/sbin/strip"
+    found: "/usr/bin/strip"
+    search_context:
+      ENV{PATH}:
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "/home/mccakit/dev/emscripten/cache/sysroot;/home/mccakit/dev/emscripten/cache/sysroot"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "CMakeLists.txt:13 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ld"
+    candidate_directories:
+      - "/home/mccakit/dev/emscripten/"
+      - "/home/mccakit/dev/gradle/bin/"
+      - "/home/mccakit/dev/ninja/bin/"
+      - "/home/mccakit/dev/cmake/bin/"
+      - "/home/mccakit/dev/android-clt/platform-tools/"
+      - "/home/mccakit/dev/llvm/bin/"
+      - "/home/mccakit/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+      - "/bin/"
+      - "/sbin/"
+    searched_directories:
+      - "/home/mccakit/dev/emscripten/ld"
+      - "/home/mccakit/dev/gradle/bin/ld"
+      - "/home/mccakit/dev/ninja/bin/ld"
+      - "/home/mccakit/dev/cmake/bin/ld"
+      - "/home/mccakit/dev/android-clt/platform-tools/ld"
+      - "/home/mccakit/dev/llvm/bin/ld"
+      - "/home/mccakit/.local/bin/ld"
+      - "/usr/local/sbin/ld"
+      - "/usr/local/bin/ld"
+      - "/usr/sbin/ld"
+    found: "/usr/bin/ld"
+    search_context:
+      ENV{PATH}:
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "/home/mccakit/dev/emscripten/cache/sysroot;/home/mccakit/dev/emscripten/cache/sysroot"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "CMakeLists.txt:13 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJDUMP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objdump"
+    candidate_directories:
+      - "/home/mccakit/dev/emscripten/"
+      - "/home/mccakit/dev/gradle/bin/"
+      - "/home/mccakit/dev/ninja/bin/"
+      - "/home/mccakit/dev/cmake/bin/"
+      - "/home/mccakit/dev/android-clt/platform-tools/"
+      - "/home/mccakit/dev/llvm/bin/"
+      - "/home/mccakit/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+      - "/bin/"
+      - "/sbin/"
+    searched_directories:
+      - "/home/mccakit/dev/emscripten/objdump"
+      - "/home/mccakit/dev/gradle/bin/objdump"
+      - "/home/mccakit/dev/ninja/bin/objdump"
+      - "/home/mccakit/dev/cmake/bin/objdump"
+      - "/home/mccakit/dev/android-clt/platform-tools/objdump"
+      - "/home/mccakit/dev/llvm/bin/objdump"
+      - "/home/mccakit/.local/bin/objdump"
+      - "/usr/local/sbin/objdump"
+      - "/usr/local/bin/objdump"
+      - "/usr/sbin/objdump"
+    found: "/usr/bin/objdump"
+    search_context:
+      ENV{PATH}:
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "/home/mccakit/dev/emscripten/cache/sysroot;/home/mccakit/dev/emscripten/cache/sysroot"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "CMakeLists.txt:13 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJCOPY"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objcopy"
+    candidate_directories:
+      - "/home/mccakit/dev/emscripten/"
+      - "/home/mccakit/dev/gradle/bin/"
+      - "/home/mccakit/dev/ninja/bin/"
+      - "/home/mccakit/dev/cmake/bin/"
+      - "/home/mccakit/dev/android-clt/platform-tools/"
+      - "/home/mccakit/dev/llvm/bin/"
+      - "/home/mccakit/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+      - "/bin/"
+      - "/sbin/"
+    searched_directories:
+      - "/home/mccakit/dev/emscripten/objcopy"
+      - "/home/mccakit/dev/gradle/bin/objcopy"
+      - "/home/mccakit/dev/ninja/bin/objcopy"
+      - "/home/mccakit/dev/cmake/bin/objcopy"
+      - "/home/mccakit/dev/android-clt/platform-tools/objcopy"
+      - "/home/mccakit/dev/llvm/bin/objcopy"
+      - "/home/mccakit/.local/bin/objcopy"
+      - "/usr/local/sbin/objcopy"
+      - "/usr/local/bin/objcopy"
+      - "/usr/sbin/objcopy"
+    found: "/usr/bin/objcopy"
+    search_context:
+      ENV{PATH}:
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "/home/mccakit/dev/emscripten/cache/sysroot;/home/mccakit/dev/emscripten/cache/sysroot"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "CMakeLists.txt:13 (project)"
+    mode: "program"
+    variable: "CMAKE_READELF"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "readelf"
+    candidate_directories:
+      - "/home/mccakit/dev/emscripten/"
+      - "/home/mccakit/dev/gradle/bin/"
+      - "/home/mccakit/dev/ninja/bin/"
+      - "/home/mccakit/dev/cmake/bin/"
+      - "/home/mccakit/dev/android-clt/platform-tools/"
+      - "/home/mccakit/dev/llvm/bin/"
+      - "/home/mccakit/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+      - "/bin/"
+      - "/sbin/"
+    searched_directories:
+      - "/home/mccakit/dev/emscripten/readelf"
+      - "/home/mccakit/dev/gradle/bin/readelf"
+      - "/home/mccakit/dev/ninja/bin/readelf"
+      - "/home/mccakit/dev/cmake/bin/readelf"
+      - "/home/mccakit/dev/android-clt/platform-tools/readelf"
+      - "/home/mccakit/dev/llvm/bin/readelf"
+      - "/home/mccakit/.local/bin/readelf"
+      - "/usr/local/sbin/readelf"
+      - "/usr/local/bin/readelf"
+      - "/usr/sbin/readelf"
+    found: "/usr/bin/readelf"
+    search_context:
+      ENV{PATH}:
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "/home/mccakit/dev/emscripten/cache/sysroot;/home/mccakit/dev/emscripten/cache/sysroot"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "CMakeLists.txt:13 (project)"
+    mode: "program"
+    variable: "CMAKE_DLLTOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "dlltool"
+    candidate_directories:
+      - "/home/mccakit/dev/emscripten/"
+      - "/home/mccakit/dev/gradle/bin/"
+      - "/home/mccakit/dev/ninja/bin/"
+      - "/home/mccakit/dev/cmake/bin/"
+      - "/home/mccakit/dev/android-clt/platform-tools/"
+      - "/home/mccakit/dev/llvm/bin/"
+      - "/home/mccakit/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+      - "/bin/"
+      - "/sbin/"
+    searched_directories:
+      - "/home/mccakit/dev/emscripten/dlltool"
+      - "/home/mccakit/dev/gradle/bin/dlltool"
+      - "/home/mccakit/dev/ninja/bin/dlltool"
+      - "/home/mccakit/dev/cmake/bin/dlltool"
+      - "/home/mccakit/dev/android-clt/platform-tools/dlltool"
+      - "/home/mccakit/dev/llvm/bin/dlltool"
+      - "/home/mccakit/.local/bin/dlltool"
+      - "/usr/local/sbin/dlltool"
+      - "/usr/local/bin/dlltool"
+      - "/usr/sbin/dlltool"
+      - "/usr/bin/dlltool"
+      - "/sbin/dlltool"
+      - "/bin/dlltool"
+      - "/usr/games/dlltool"
+      - "/usr/local/games/dlltool"
+      - "/snap/bin/dlltool"
+      - "/bin/dlltool"
+      - "/sbin/dlltool"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "/home/mccakit/dev/emscripten/cache/sysroot;/home/mccakit/dev/emscripten/cache/sysroot"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "CMakeLists.txt:13 (project)"
+    mode: "program"
+    variable: "CMAKE_ADDR2LINE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "addr2line"
+    candidate_directories:
+      - "/home/mccakit/dev/emscripten/"
+      - "/home/mccakit/dev/gradle/bin/"
+      - "/home/mccakit/dev/ninja/bin/"
+      - "/home/mccakit/dev/cmake/bin/"
+      - "/home/mccakit/dev/android-clt/platform-tools/"
+      - "/home/mccakit/dev/llvm/bin/"
+      - "/home/mccakit/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+      - "/bin/"
+      - "/sbin/"
+    searched_directories:
+      - "/home/mccakit/dev/emscripten/addr2line"
+      - "/home/mccakit/dev/gradle/bin/addr2line"
+      - "/home/mccakit/dev/ninja/bin/addr2line"
+      - "/home/mccakit/dev/cmake/bin/addr2line"
+      - "/home/mccakit/dev/android-clt/platform-tools/addr2line"
+      - "/home/mccakit/dev/llvm/bin/addr2line"
+      - "/home/mccakit/.local/bin/addr2line"
+      - "/usr/local/sbin/addr2line"
+      - "/usr/local/bin/addr2line"
+      - "/usr/sbin/addr2line"
+    found: "/usr/bin/addr2line"
+    search_context:
+      ENV{PATH}:
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "/home/mccakit/dev/emscripten/cache/sysroot;/home/mccakit/dev/emscripten/cache/sysroot"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeDetermineASMCompiler.cmake:267 (include)"
+      - "CMakeLists.txt:13 (project)"
+    mode: "program"
+    variable: "CMAKE_TAPI"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "tapi"
+    candidate_directories:
+      - "/home/mccakit/dev/emscripten/"
+      - "/home/mccakit/dev/gradle/bin/"
+      - "/home/mccakit/dev/ninja/bin/"
+      - "/home/mccakit/dev/cmake/bin/"
+      - "/home/mccakit/dev/android-clt/platform-tools/"
+      - "/home/mccakit/dev/llvm/bin/"
+      - "/home/mccakit/.local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/sbin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/bin/"
+      - "/usr/games/"
+      - "/usr/local/games/"
+      - "/snap/bin/"
+      - "/bin/"
+      - "/sbin/"
+    searched_directories:
+      - "/home/mccakit/dev/emscripten/tapi"
+      - "/home/mccakit/dev/gradle/bin/tapi"
+      - "/home/mccakit/dev/ninja/bin/tapi"
+      - "/home/mccakit/dev/cmake/bin/tapi"
+      - "/home/mccakit/dev/android-clt/platform-tools/tapi"
+      - "/home/mccakit/dev/llvm/bin/tapi"
+      - "/home/mccakit/.local/bin/tapi"
+      - "/usr/local/sbin/tapi"
+      - "/usr/local/bin/tapi"
+      - "/usr/sbin/tapi"
+      - "/usr/bin/tapi"
+      - "/sbin/tapi"
+      - "/bin/tapi"
+      - "/usr/games/tapi"
+      - "/usr/local/games/tapi"
+      - "/snap/bin/tapi"
+      - "/bin/tapi"
+      - "/sbin/tapi"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "/home/mccakit/dev/emscripten/cache/sysroot;/home/mccakit/dev/emscripten/cache/sysroot"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/Platform/Emscripten.cmake:6 (find_file)"
+      - "/home/mccakit/dev/cmake/share/cmake-4.1/Modules/CMakeSystemSpecificInformation.cmake:32 (include)"
+      - "CMakeLists.txt:13 (project)"
+    mode: "file"
+    variable: "_EMSCRIPTEN_PLATFORM_MODULE"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "Platform/Emscripten.cmake"
+    candidate_directories:
+      - "/home/mccakit/dev/emscripten/cmake/Modules/"
+      - "/home/mccakit/desktop/cross_compile_fun/extern/sdl_mixer/cmake/"
+    found: "/home/mccakit/dev/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+    search_context:
+      ENV{PATH}:
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/home/mccakit/dev/gradle/bin"
+        - "/home/mccakit/dev/ninja/bin"
+        - "/home/mccakit/dev/cmake/bin"
+        - "/home/mccakit/dev/android-clt/platform-tools"
+        - "/home/mccakit/dev/llvm/bin"
+        - "/home/mccakit/.local/bin"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/sbin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/bin"
+        - "/usr/games"
+        - "/usr/local/games"
+        - "/snap/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/"
+        - "/"
+      CMAKE_FIND_ROOT_PATH: "/home/mccakit/dev/emscripten/cache/sysroot;/home/mccakit/dev/emscripten/cache/sysroot"
+...

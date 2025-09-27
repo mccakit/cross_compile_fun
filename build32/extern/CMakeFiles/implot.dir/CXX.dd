@@ -1,0 +1,7 @@
+ninja_dyndep_version = 1.0
+build extern/CMakeFiles/implot.dir/implot/implot.cpp.o: dyndep
+
+build extern/CMakeFiles/implot.dir/implot/implot_demo.cpp.o: dyndep
+
+build extern/CMakeFiles/implot.dir/implot/implot_items.cpp.o: dyndep
+

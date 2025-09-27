@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 4.1.2)
-set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD "d0edc3af-4c50-42ea-a356-e2862fe7a444")
-set(CMAKE_CXX_MODULE_STD ON)
-
+cmake_minimum_required(VERSION 4.1.1)
+if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+    set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD "d0edc3af-4c50-42ea-a356-e2862fe7a444")
+    set(CMAKE_CXX_MODULE_STD ON)
+endif()
 project(
     CrossFun
     VERSION 1.0

@@ -1,0 +1,9 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "extern/CMakeFiles/implot.dir/implot/implot_items.cpp.o"
+    }
+  ],
+  "version": 1
+}

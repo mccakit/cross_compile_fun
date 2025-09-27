@@ -1,0 +1,63 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "Clang",
+	"compiler-simulate-id" : "",
+	"config" : "RELEASE",
+	"cxx-modules" : {},
+	"database-info" : null,
+	"dir-cur-bld" : "/home/mccakit/desktop/cross_compile_fun/build32/extern",
+	"dir-cur-src" : "/home/mccakit/desktop/cross_compile_fun/extern",
+	"dir-top-bld" : "/home/mccakit/desktop/cross_compile_fun/build32",
+	"dir-top-src" : "/home/mccakit/desktop/cross_compile_fun",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"/home/mccakit/desktop/cross_compile_fun/extern/imgui",
+		"/home/mccakit/desktop/cross_compile_fun/extern/imgui/backends",
+		"extern/sdl/include-revision",
+		"/home/mccakit/desktop/cross_compile_fun/extern/sdl/include"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "/home/mccakit/desktop/cross_compile_fun/build32/extern/CMakeFiles/imgui.dir",
+	"sources" : 
+	{
+		"extern/CMakeFiles/imgui.dir/imgui/backends/imgui_impl_opengl3.cpp.o" : 
+		{
+			"language" : "CXX",
+			"source" : "/home/mccakit/desktop/cross_compile_fun/extern/imgui/backends/imgui_impl_opengl3.cpp"
+		},
+		"extern/CMakeFiles/imgui.dir/imgui/backends/imgui_impl_sdl3.cpp.o" : 
+		{
+			"language" : "CXX",
+			"source" : "/home/mccakit/desktop/cross_compile_fun/extern/imgui/backends/imgui_impl_sdl3.cpp"
+		},
+		"extern/CMakeFiles/imgui.dir/imgui/imgui.cpp.o" : 
+		{
+			"language" : "CXX",
+			"source" : "/home/mccakit/desktop/cross_compile_fun/extern/imgui/imgui.cpp"
+		},
+		"extern/CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o" : 
+		{
+			"language" : "CXX",
+			"source" : "/home/mccakit/desktop/cross_compile_fun/extern/imgui/imgui_demo.cpp"
+		},
+		"extern/CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o" : 
+		{
+			"language" : "CXX",
+			"source" : "/home/mccakit/desktop/cross_compile_fun/extern/imgui/imgui_draw.cpp"
+		},
+		"extern/CMakeFiles/imgui.dir/imgui/imgui_tables.cpp.o" : 
+		{
+			"language" : "CXX",
+			"source" : "/home/mccakit/desktop/cross_compile_fun/extern/imgui/imgui_tables.cpp"
+		},
+		"extern/CMakeFiles/imgui.dir/imgui/imgui_widgets.cpp.o" : 
+		{
+			"language" : "CXX",
+			"source" : "/home/mccakit/desktop/cross_compile_fun/extern/imgui/imgui_widgets.cpp"
+		}
+	}
+}

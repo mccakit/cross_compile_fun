@@ -1,0 +1,35 @@
+extern/CMakeFiles/imgui.dir/imgui/backends/imgui_impl_opengl3.cpp.o.ddi: \
+  /home/mccakit/desktop/cross_compile_fun/extern/imgui/backends/imgui_impl_opengl3.cpp \
+  /home/mccakit/desktop/cross_compile_fun/extern/imgui/imgui.h \
+  /home/mccakit/desktop/cross_compile_fun/extern/imgui/imconfig.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/c++/v1/float.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/c++/v1/__config \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/c++/v1/__config_site \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/c++/v1/__configuration/abi.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/c++/v1/__configuration/compiler.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/c++/v1/__configuration/platform.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/c++/v1/__configuration/availability.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/c++/v1/__configuration/language.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/float.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/bits/float.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/compat/stdarg.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/stdarg.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/bits/alltypes.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/c++/v1/stddef.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/stddef.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/compat/string.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/c++/v1/string.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/string.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/features.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/strings.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/assert.h \
+  /home/mccakit/desktop/cross_compile_fun/extern/imgui/backends/imgui_impl_opengl3.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/c++/v1/stdio.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/stdio.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/wasi/api.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/stdint.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/bits/stdint.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/GLES2/gl2.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/GLES2/gl2platform.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/KHR/khrplatform.h \
+  /home/mccakit/dev/emscripten/cache/sysroot/include/GLES2/gl2ext.h

@@ -1,0 +1,9 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "extern/CMakeFiles/imgui.dir/imgui/imgui_tables.cpp.o"
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/mccakit/desktop/cross_compile_fun/build32/extern/sdl_mixer/external/wavpack-build/CMakeFiles/CheckASM/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

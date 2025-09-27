@@ -10,16 +10,16 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Install CMake 4.0.2
+      - name: Install CMake 4.1.1
         run: |
-          wget https://github.com/Kitware/CMake/releases/download/v4.0.2/cmake-4.0.2-linux-x86_64.sh
-          chmod +x cmake-4.0.2-linux-x86_64.sh
-          sudo ./cmake-4.0.2-linux-x86_64.sh --skip-license --prefix=/usr/local
+          wget https://github.com/Kitware/CMake/releases/download/v4.1.1/cmake-4.1.1-linux-x86_64.sh
+          chmod +x cmake-4.1.1-linux-x86_64.sh
+          sudo ./cmake-4.1.1-linux-x86_64.sh --skip-license --prefix=/usr/local
           cmake --version
 
       - name: Get Emscripten
         run: |
-          git clone https://github.com/emscripten-core/emsdk.git --depth=1
+          git clone --recurse-submodules --shallow-submodules --depth=1 https://github.com/emscripten-core/emsdk.git
           cd emsdk
           ./emsdk install tot
           ./emsdk activate tot

@@ -1,0 +1,3 @@
+include(/home/mccakit/dev/emscripten/cmake/Modules/Platform/Emscripten.cmake)
+add_compile_options(-w -sMEMORY64=1 -sUSE_PTHREADS=1 -sASSERTIONS -sALLOW_MEMORY_GROWTH)
+add_link_options(-w -sMEMORY64=1 -sUSE_PTHREADS=1)
