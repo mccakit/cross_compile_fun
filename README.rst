@@ -9,22 +9,20 @@ supported platforms and their respective build commands.
  Supported Platforms
 *********************
 
--  Windows x64
--  Windows ARM64
--  Debian x64
--  Debian ARM64
--  Fedora x64
--  Fedora ARM64
--  OpenSUSE Tumbleweed x64
--  OpenSUSE Tumbleweed ARM64
--  Arch x64
--  MacOS x64
--  MacOS ARM64
--  iOS ARM64
--  iOS Simulator x64
--  Android ARM64
--  WASM32
--  WASM64
+.. csv-table::
+   :header: "Platform", "Architecture"
+   :widths: 20, 20
+
+   "Windows", "x64, ARM64"
+   "Debian", "x64, ARM64"
+   "Fedora", "x64, ARM64"
+   "OpenSUSE Tumbleweed", "x64, ARM64"
+   "Arch", "x64"
+   "MacOS", "x64, ARM64"
+   "iOS", "ARM64"
+   "iOS Simulator", "x64, ARM64"
+   "Android", "ARM64"
+   "Emscripten", "WASM32, WASM64"
 
 ****************************
  Build Instructions Summary
