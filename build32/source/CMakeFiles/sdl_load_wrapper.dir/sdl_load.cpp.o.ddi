@@ -1,9 +1,0 @@
-{
-  "revision": 0,
-  "rules": [
-    {
-      "primary-output": "source/CMakeFiles/sdl_load_wrapper.dir/sdl_load.cpp.o"
-    }
-  ],
-  "version": 1
-}

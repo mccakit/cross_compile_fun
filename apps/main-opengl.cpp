@@ -27,6 +27,7 @@ import std;
 #include <cmath>
 #include <cstdio>
 #endif
+
 struct ImageData
 {
     int width = 0;

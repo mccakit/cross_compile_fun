@@ -31,11 +31,12 @@ Build Instructions
 
 - **WASM32**
 
-  Use Emscripten's `emcmake.py` to generate the build files:
+  Build using CMake, remember to set the emsdk cmake toolchain file:
 
   .. code-block:: console
 
-     C:/dev/toolchains/emsdk/upstream/emscripten/emcmake.py cmake -B build/wasm32 -G Ninja
+     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE=toolchains/emcc-wasm32.cmake
+     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE=toolchains/emcc-wasm64.cmake
 
 - **Android ARM64**
 

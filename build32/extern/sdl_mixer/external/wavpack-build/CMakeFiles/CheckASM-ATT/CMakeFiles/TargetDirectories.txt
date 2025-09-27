@@ -1,2 +1,0 @@
-/home/mccakit/desktop/cross_compile_fun/build32/extern/sdl_mixer/external/wavpack-build/CMakeFiles/CheckASM-ATT/CMakeFiles/edit_cache.dir
-/home/mccakit/desktop/cross_compile_fun/build32/extern/sdl_mixer/external/wavpack-build/CMakeFiles/CheckASM-ATT/CMakeFiles/rebuild_cache.dir

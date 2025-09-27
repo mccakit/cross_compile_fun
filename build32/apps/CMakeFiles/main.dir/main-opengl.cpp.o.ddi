@@ -1,9 +1,0 @@
-{
-  "revision": 0,
-  "rules": [
-    {
-      "primary-output": "apps/CMakeFiles/main.dir/main-opengl.cpp.o"
-    }
-  ],
-  "version": 1
-}
