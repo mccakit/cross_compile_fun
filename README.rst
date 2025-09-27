@@ -1,9 +1,8 @@
-##########################################
- Current Platforms and Build Instructions
-##########################################
+####################
+ Cross Compile Fun!
+####################
 
-This project supports building on multiple platforms. Below are the
-supported platforms and their respective build commands.
+Cool isn't it?
 
 *********************
  Supported Platforms
