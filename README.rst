@@ -1,175 +1,54 @@
 ##########################################
-Current Platforms and Build Instructions
+ Current Platforms and Build Instructions
 ##########################################
 
 This project supports building on multiple platforms. Below are the
 supported platforms and their respective build commands.
 
 *********************
-Supported Platforms
+ Supported Platforms
 *********************
 
-- Windows x64
-- Windows ARM64
-- Debian x64
-- Debian ARM64
-- Fedora x64
-- Fedora ARM64
-- OpenSUSE Tumbleweed x64
-- OpenSUSE Tumbleweed ARM64
-- Arch x64
-- MacOS x64
-- MacOS ARM64
-- iOS ARM64
-- iOS Simulator x64
-- Android ARM64
-- WASM32
+-  Windows x64
+-  Windows ARM64
+-  Debian x64
+-  Debian ARM64
+-  Fedora x64
+-  Fedora ARM64
+-  OpenSUSE Tumbleweed x64
+-  OpenSUSE Tumbleweed ARM64
+-  Arch x64
+-  MacOS x64
+-  MacOS ARM64
+-  iOS ARM64
+-  iOS Simulator x64
+-  Android ARM64
+-  WASM32
+-  WASM64
 
-********************
-Build Instructions
-********************
+****************************
+ Build Instructions Summary
+****************************
 
-- **WASM32**
+.. csv-table::
+   :header: "Platform", "Architecture", "Requirements", "Command"
+   :widths: 15, 15, 30, 40
 
-  Build using CMake, remember to set the emsdk cmake toolchain file:
+   "Emscripten", "WASM32, WASM64", "llvm, emsdk, binaryen", "Edit the emcc-wasm* toolchain file to point to your installation then use the toolchain with cmake"
+   "Android", "ARM64", "llvm, android-ndk", "Build compiler rt, create symlink in your llvm installation to point to that, then build libc++ and edit some .inc files in the std folder of your llvm installation, then build with cmake by tweaking the toolchain and use gradle to package it"
+   "MacOS", "X64, ARM64", "XCode, llvm", "Grab XCode by creating an apple account at Apple Music or simply talking to support, then extract it with apple-sdk-tools, build libc++ then build with cmake after tweaking the toolchain"
+   "Windows", "X64, ARM64", "llvm, msvc-wine", "Grab 148992 and 150182 PR's from llvm repository, build libc++ with benchmarks disabled then build with cmake after tweaking the toolchain"
+   "IOS", "ARM64", "XCode, llvm", "Similar to MacOS"
+   "IOSSIM", "X64, ARM64", "XCode, llvm", "Similar to IOS"
+   "Debian", "X64, ARM64", "Docker, llvm", "Pull a debian container from docker hub, install the required packages from the SDL3 wiki, build libc++ then build with cmake after tweaking the toolchain"
+   "Fedora", "X64, ARM64", "Docker, llvm", "Same as debian, but you may need to manually patch ZLIB cmake file"
+   "OpenSUSE Tumbleweed", "X64, ARM64", "Docker, llvm", "Same as Fedora"
+   "Arch", "X64", "Docker, llvm", "Same as Debian"
 
-  .. code-block:: console
 
-     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE=toolchains/emcc-wasm32.cmake
-     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE=toolchains/emcc-wasm64.cmake
+.. note:: You can package linux builds into an appimage if you so desire, example:
 
-- **Android ARM64**
+  .. code:: console
 
-  Build using CMake, then package it with Gradle:
-
-  .. code-block:: console
-
-     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE=toolchains/android-arm64.cmake
-     cmake --build build
-     cd gradle
-     gradle assembleDebug
-
-- **MacOS ARM64**
-
-  Just build with CMake:
-
-  .. code-block:: console
-
-     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/macos-arm64.cmake"
-
-- **MacOS x64**
-
-  Similar to ARM64:
-
-  .. code-block:: console
-
-     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/macos-x64.cmake"
-
-iOS Builds
-==========
-
-- **iOS ARM64**
-
-  Build for actual iOS devices:
-
-  .. code-block:: console
-
-     cmake -B build/ios-arm64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/ios-arm64.cmake"
-
-- **iOS Simulator x64**
-
-  Build for the iOS Simulator on x64 macOS:
-
-  .. code-block:: console
-
-     cmake -B build/iossim-x64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/iossim-x64.cmake"
-
-Linux Builds
-============
-
-Debian
-------
-
-- **ARM64**
-
-  .. code-block:: console
-
-     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/debian-arm64.cmake"
-     cmake --install build --prefix build/output
-     appimagetool build/output/crossfun.AppDir
-
-- **x64**
-
-  .. code-block:: console
-
-     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/debian-x64.cmake"
-     cmake --install build --prefix build/output
-     appimagetool build/output/crossfun.AppDir
-
-Fedora
-------
-
-- **ARM64**
-
-  .. code-block:: console
-
-     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/fedora-arm64.cmake"
-     cmake --install build --prefix build/output
-     appimagetool build/output/crossfun.AppDir
-
-- **x64**
-
-  .. code-block:: console
-
-     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/fedora-x64.cmake"
-     cmake --install build --prefix build/output
-     appimagetool build/output/crossfun.AppDir
-
-OpenSUSE Tumbleweed
--------------------
-
-- **ARM64**
-
-  .. code-block:: console
-
-     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/opensuse-tumbleweed-arm64.cmake"
-     cmake --install build --prefix build/output
-     appimagetool build/output/crossfun.AppDir
-
-- **x64**
-
-  .. code-block:: console
-
-     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/opensuse-tumbleweed-x64.cmake"
-     cmake --install build --prefix build/output
-     appimagetool build/output/crossfun.AppDir
-
-Arch
-----
-
-- **x64 only**
-
-  .. code-block:: console
-
-     cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/arch-x64.cmake"
-     cmake --install build --prefix build/output
-     appimagetool build/output/crossfun.AppDir
-
-Windows Builds
-==============
-
-- **Windows ARM64**
-
-  Configure build with LLVM toolchain for ARM64 Windows:
-
-  .. code-block:: console
-
-     cmake -B build/win-arm64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/llvm-win-arm64.cmake"
-
-- **Windows x64**
-
-  Configure build with LLVM toolchain for x64 Windows:
-
-  .. code-block:: console
-
-     cmake -B build/win-x64 -G Ninja -DCMAKE_TOOLCHAIN_FILE="toolchains/llvm-win-x64.cmake"
+      cmake --install build --prefix build/output
+      appimagetool build/output/crossfun.AppDir
