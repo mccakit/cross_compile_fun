@@ -2,26 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Minimal Emscripten Canvas</title>
+<title>Resizable Canvas</title>
 <style>
   html, body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    background: #000;
-    overscroll-behavior: none;
     height: 100%;
     width: 100%;
-    box-sizing: border-box;
-  }
-  body {
-    padding: 20px;
   }
   canvas {
     display: block;
-    margin: auto;
-    border: 0;
-    background-color: #000;
+    width: 100%;
+    height: 100%;
   }
 </style>
 </head>
@@ -30,11 +22,10 @@
 <script src="main.js"></script>
 <script>
   const canvas = document.getElementById('canvas');
-  const padding = 20; // must match body padding in CSS
 
   function resizeCanvas() {
-    canvas.width  = window.innerWidth  - padding * 2;
-    canvas.height = window.innerHeight - padding * 2;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
   }
 
   window.addEventListener('resize', resizeCanvas);
