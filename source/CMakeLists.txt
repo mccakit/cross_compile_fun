@@ -1,8 +1,0 @@
-add_library(sdl_load_wrapper STATIC)
-if(APPLE)
-    target_sources(sdl_load_wrapper PRIVATE ${CMAKE_SOURCE_DIR}/source/sdl_load_apple.cpp)
-else()
-    target_sources(sdl_load_wrapper PRIVATE ${CMAKE_SOURCE_DIR}/source/sdl_load.cpp)
-endif()
-target_include_directories(sdl_load_wrapper PUBLIC ${CMAKE_SOURCE_DIR}/include)
-target_link_libraries(sdl_load_wrapper PRIVATE SDL3::SDL3)

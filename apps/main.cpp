@@ -1,24 +1,15 @@
-#include "SDL3/SDL_iostream.h"
-#include "SDL3/SDL_stdinc.h"
-#include "imgui.h"
-#include "imgui_impl_opengl3.h"
-#include "imgui_impl_sdl3.h"
-#include "implot.h"
+#include <glad/glad.h>
+#include <imgui.h>
+#include <imgui_impl_opengl3.h>
+#include <imgui_impl_sdl3.h>
+#include <implot.h>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
-
-#include "sdl_load.hpp"
-#ifdef IMGUI_IMPL_OPENGL_ES2
-#include <SDL3/SDL_opengles2.h>
-#else
 #include <SDL3/SDL_opengl.h>
-#endif
 #include <SDL3_mixer/SDL_mixer.h>
-
-#define _CRT_SECURE_NO_WARNINGS
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include <SDL3_image/SDL_image.h>
 import std;
+import sdl_load_wrapper;
 struct ImageData
 {
     int width = 0;
@@ -27,45 +18,27 @@ struct ImageData
 };
 
 // Simple helper function to load an image into a OpenGL texture with common settings
-bool LoadTextureFromMemory(const void *data, size_t data_size, GLuint *out_texture, int *out_width, int *out_height)
+void texture_from_surface(SDL_Surface *surface, ImageData &image)
 {
-    // Load from file
-    int image_width = 0;
-    int image_height = 0;
-    unsigned char *image_data =
-        stbi_load_from_memory((const unsigned char *)data, (int)data_size, &image_width, &image_height, NULL, 4);
-    if (image_data == NULL)
-        return false;
-    // Create a OpenGL texture identifier
-    GLuint image_texture;
-    glGenTextures(1, &image_texture);
-    glBindTexture(GL_TEXTURE_2D, image_texture);
-    // Setup filtering parameters for display
+    GLuint texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-// Upload pixels into texture
-#ifndef IMGUI_IMPL_OPENGL_ES2
-    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
-#endif
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data);
-    stbi_image_free(image_data);
-    *out_texture = image_texture;
-    *out_width = image_width;
-    *out_height = image_height;
-    return true;
-}
-
-// Open and read a file using SDL_LoadFile(), then forward to LoadTextureFromMemory()
-bool LoadTextureFromFile(const char *file_name, GLuint *out_texture, int *out_width, int *out_height)
-{
-    size_t file_size = 0;
-    void *file_data = SDL_LoadFileWrapper(file_name, &file_size);
-    if (file_data == NULL)
-        return false;
-
-    bool ret = LoadTextureFromMemory(file_data, file_size, out_texture, out_width, out_height);
-    SDL_free(file_data);
-    return ret;
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexImage2D(GL_TEXTURE_2D,
+                 0,       // mipmap level
+                 GL_RGBA, // internal format
+                 surface->w, surface->h,
+                 0,                // border
+                 GL_RGBA,          // format of pixel data
+                 GL_UNSIGNED_BYTE, // type of pixel data
+                 surface->pixels);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    image.texture = texture;
+    image.height = surface->h;
+    image.width = surface->w;
 }
 
 struct app_state
@@ -82,12 +55,9 @@ struct app_state
     MIX_Mixer *mixer{};
     MIX_Track *track{};
     MIX_Audio *audio{};
-    // img
-    int im0_width = 0;
-    int im0_height = 0;
-    GLuint im0_texture = 0;
     // font
     ImFont *proggy_clean_36;
+    //image
     std::vector<ImageData> gif_data;
 };
 app_state state{};
@@ -95,14 +65,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD | SDL_INIT_AUDIO);
 
-#ifdef IMGUI_IMPL_OPENGL_ES2
-    // GL ES 2.0 + GLSL 100 (WebGL 1.0)
-    const char *glsl_version = "#version 100";
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-#elif IMGUI_IMPL_OPENGL_ES3
+#ifdef IMGUI_IMPL_OPENGL_ES3
     // GL ES 3.0 + GLSL 300 es (WebGL 2.0)
     const char *glsl_version = "#version 300 es";
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
@@ -118,20 +81,23 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 #else
     // OpenGL 3.0
-    const char *glsl_version = "#version 130";
+    const char *glsl_version = "#version 460";
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
 #endif
     // Create window with graphics context
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+
+    // Set window flags
     state.window_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_HIDDEN | SDL_WINDOW_HIGH_PIXEL_DENSITY;
     state.window = SDL_CreateWindow("Dear ImGui SDL3+OpenGL3 example", 625, 1000, state.window_flags);
     state.gl_context = SDL_GL_CreateContext(state.window);
     SDL_GL_MakeCurrent(state.window, state.gl_context);
+    gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress);
     SDL_GL_SetSwapInterval(1); // Enable vsync
     SDL_SetWindowPosition(state.window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
     SDL_ShowWindow(state.window);
@@ -148,32 +114,17 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     ImGui_ImplSDL3_InitForOpenGL(state.window, state.gl_context);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
-    std::vector<std::string> helper{};
-    const std::string prefix = "707a936ef0d5487fd2bafb1e0954bf27k7Lsiuac7Cdj5qPt-";
-    const std::string base_path = "nameless_deity/";
-
-    for (int i = 0; i < 135; i++)
-    {
-        std::string filename = prefix + std::to_string(i) + ".png";
-        std::string full_path = base_path + filename;
-        size_t file_size;
-        void *file_data = SDL_LoadFileWrapper(full_path.c_str(), &file_size);
-        if (file_data)
-        {
-            SDL_free(file_data);
-            helper.push_back(full_path); // Store full path directly
-        }
-        else
-        {
-            break;
-        }
-    }
-    ImageData image;
-    for (const auto &full_path : helper)
-    {
-        LoadTextureFromFile(full_path.c_str(), &image.texture, &image.width, &image.height);
+    SDL_Surface *surface;
+    ImageData image{};
+    IMG_Animation* anim = IMG_LoadAnimation("nameless_deity.gif");
+    state.gif_data.reserve(anim->count);
+    for (int i = 0; i < anim->count; i++) {
+        surface = anim->frames[i];
+        surface = SDL_ConvertSurface(surface, SDL_PIXELFORMAT_RGBA32);
+        texture_from_surface(surface, image);
         state.gif_data.push_back(image);
     }
+    SDL_DestroySurface(surface);
     state.audioDevice = SDL_OpenAudioDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, nullptr);
     MIX_Init();
     state.mixer = MIX_CreateMixerDevice(state.audioDevice, nullptr);
@@ -234,16 +185,16 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     ImGui::TableSetColumnIndex(1);
     ImGui::PushFont(state.proggy_clean_36);
 
-    const char *text1 = "Cross Compile Fun!";
-    float text1_width = ImGui::CalcTextSize(text1).x;
+    static constexpr std::string_view text1 = "Cross Compile Fun!";
+    float text1_width = ImGui::CalcTextSize(text1.data()).x;
     ImGui::SetCursorPosX((ImGui::GetWindowWidth() - text1_width) * 0.5f);
-    ImGui::Text("%s", text1);
+    ImGui::Text("%s", text1.data());
 
-    char fps_text[64];
-    snprintf(fps_text, sizeof(fps_text), "FPS: %.1f", ImGui::GetIO().Framerate);
-    float fps_width = ImGui::CalcTextSize(fps_text).x;
+    static std::array<char, 32> fps_text;
+    std::snprintf(fps_text.data(), fps_text.size(), "FPS: %.1f", ImGui::GetIO().Framerate);
+    float fps_width = ImGui::CalcTextSize(fps_text.data()).x;
     ImGui::SetCursorPosX((ImGui::GetWindowWidth() - fps_width) * 0.5f);
-    ImGui::Text("%s", fps_text);
+    ImGui::Text("%s", fps_text.data());
 
     ImGui::PopFont();
 

@@ -36,10 +36,10 @@ target_link_libraries(
         SDL3_mixer::SDL3_mixer
         SDL3_image::SDL3_image
         SDL3::SDL3
-        stb
         imgui
         implot
         sdl_load_wrapper
+        glad
 )
 if(EMSCRIPTEN)
     target_link_libraries(
@@ -48,7 +48,7 @@ if(EMSCRIPTEN)
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/Roboto_Condensed-Regular.ttf@/"
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/sky_after_rain.mp3@/"
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/twisted_garden.mp3@/"
-            "--preload-file ${CMAKE_CURRENT_LIST_DIR}/nameless_deity@/nameless_deity"
+            "--preload-file ${CMAKE_CURRENT_LIST_DIR}/nameless_deity.gif@/"
     )
 endif()
 macro(copy_helper filename)
@@ -66,7 +66,7 @@ if(NOT EMSCRIPTEN)
     copy_helper("Roboto_Condensed-Regular.ttf")
     copy_helper("sky_after_rain.mp3")
     copy_helper("twisted_garden.mp3")
-    copy_helper("nameless_deity")
+    copy_helper("nameless_deity.gif")
 endif()
 if(Linux)
     install(
@@ -76,10 +76,9 @@ if(Linux)
             PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
     )
     install(
-        FILES Roboto_Condensed-Regular.ttf sky_after_rain.mp3 twisted_garden.mp3
+        FILES Roboto_Condensed-Regular.ttf sky_after_rain.mp3 twisted_garden.mp3 nameless_deity.gif
         DESTINATION crossfun.AppDir/usr/bin
     )
-    install(DIRECTORY nameless_deity DESTINATION crossfun.AppDir/usr/bin)
     install(
         FILES appimage/crossfun.desktop appimage/crossfun.png appimage/AppRun
         DESTINATION crossfun.AppDir
@@ -89,8 +88,7 @@ endif()
 if(WIN32)
     install(TARGETS main RUNTIME DESTINATION .)
     install(
-        FILES Roboto_Condensed-Regular.ttf sky_after_rain.mp3 twisted_garden.mp3
+        FILES Roboto_Condensed-Regular.ttf sky_after_rain.mp3 twisted_garden.mp3 nameless_deity.gif
         DESTINATION .
     )
-    install(DIRECTORY nameless_deity DESTINATION .)
 endif()
