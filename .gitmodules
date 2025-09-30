@@ -1,28 +1,28 @@
-[submodule "extern/imgui"]
-	path = extern/imgui
+[submodule "deps/imgui"]
+	path = deps/imgui
 	url = git@github.com:ocornut/imgui.git
 	branch = master
-[submodule "extern/implot"]
-	path = extern/implot
+[submodule "deps/implot"]
+	path = deps/implot
 	url = git@github.com:epezent/implot.git
 	branch = master
-[submodule "extern/stb"]
-	path = extern/stb
+[submodule "deps/stb"]
+	path = deps/stb
 	url = git@github.com:nothings/stb.git
 	branch = master
-[submodule "extern/sdl"]
-	path = extern/sdl
+[submodule "deps/sdl"]
+	path = deps/sdl
 	url = git@github.com:libsdl-org/SDL.git
 	branch = main
-[submodule "extern/sdl_mixer"]
-	path = extern/sdl_mixer
+[submodule "deps/sdl_mixer"]
+	path = deps/sdl_mixer
 	url = git@github.com:libsdl-org/SDL_mixer.git
 	branch = main
-[submodule "extern/sdl_image"]
-	path = extern/sdl_image
+[submodule "deps/sdl_image"]
+	path = deps/sdl_image
 	url = git@github.com:libsdl-org/SDL_image.git
 	branch = main
-[submodule "extern/sdl_ttf"]
-	path = extern/sdl_ttf
+[submodule "deps/sdl_ttf"]
+	path = deps/sdl_ttf
 	url = git@github.com:libsdl-org/SDL_ttf.git
 	branch = main
