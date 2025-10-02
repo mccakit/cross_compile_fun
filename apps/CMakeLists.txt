@@ -92,3 +92,8 @@ if(WIN32)
         DESTINATION .
     )
 endif()
+if(ANDROID)
+    target_link_options(main PRIVATE
+        -Wl,--version-script=${CMAKE_CURRENT_LIST_DIR}/android.export.sym
+    )
+endif()

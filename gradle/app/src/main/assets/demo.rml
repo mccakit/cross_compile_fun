@@ -1,0 +1,25 @@
+<rml>
+    <head>
+        <style>
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: white;
+            }
+            div#content {
+                font-family: LatoLatin;
+                font-size: 48px;
+                color: black;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content">Hello, World!</div>
+    </body>
+</rml>
