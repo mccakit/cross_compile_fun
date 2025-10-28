@@ -3,11 +3,6 @@ if(ANDROID)
 else()
     add_executable(main main.cpp)
 endif()
-if(ANDROID OR EMSCRIPTEN)
-    target_compile_definitions(main PUBLIC IMGUI_IMPL_OPENGL_ES3)
-elseif(IOS)
-    target_compile_definitions(main PUBLIC IMGUI_IMPL_OPENGL_ES2)
-endif()
 target_compile_definitions(main PUBLIC SDL_MAIN_USE_CALLBACKS)
 
 if(ANDROID)
@@ -40,12 +35,16 @@ target_link_libraries(
         implot
         sdl_load_wrapper
         glad
+        texture
+        gl_config
+        widgets
+        nlohmann_json_modules
 )
 if(EMSCRIPTEN)
     target_link_libraries(
         main
         PRIVATE
-            "--preload-file ${CMAKE_CURRENT_LIST_DIR}/Roboto_Condensed-Regular.ttf@/"
+            "--preload-file ${CMAKE_CURRENT_LIST_DIR}/Ubuntu-Regular.ttf@/"
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/sky_after_rain.mp3@/"
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/twisted_garden.mp3@/"
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/nameless_deity.gif@/"
@@ -63,7 +62,7 @@ macro(copy_helper filename)
 endmacro()
 
 if(NOT EMSCRIPTEN)
-    copy_helper("Roboto_Condensed-Regular.ttf")
+    copy_helper("Ubuntu-Regular.ttf")
     copy_helper("sky_after_rain.mp3")
     copy_helper("twisted_garden.mp3")
     copy_helper("nameless_deity.gif")
@@ -76,7 +75,7 @@ if(Linux)
             PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
     )
     install(
-        FILES Roboto_Condensed-Regular.ttf sky_after_rain.mp3 twisted_garden.mp3 nameless_deity.gif
+        FILES Ubuntu-Regular.ttf sky_after_rain.mp3 twisted_garden.mp3 nameless_deity.gif
         DESTINATION crossfun.AppDir/usr/bin
     )
     install(
@@ -88,7 +87,7 @@ endif()
 if(WIN32)
     install(TARGETS main RUNTIME DESTINATION .)
     install(
-        FILES Roboto_Condensed-Regular.ttf sky_after_rain.mp3 twisted_garden.mp3 nameless_deity.gif
+        FILES Ubuntu-Regular.ttf sky_after_rain.mp3 twisted_garden.mp3 nameless_deity.gif
         DESTINATION .
     )
 endif()

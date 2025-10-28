@@ -6,10 +6,6 @@
 	path = deps/implot
 	url = git@github.com:epezent/implot.git
 	branch = master
-[submodule "deps/stb"]
-	path = deps/stb
-	url = git@github.com:nothings/stb.git
-	branch = master
 [submodule "deps/sdl"]
 	path = deps/sdl
 	url = git@github.com:libsdl-org/SDL.git
@@ -26,3 +22,7 @@
 	path = deps/sdl_ttf
 	url = git@github.com:libsdl-org/SDL_ttf.git
 	branch = main
+[submodule "deps/nlohmann_json"]
+	path = deps/nlohmann_json
+	url = https://github.com/nlohmann/json.git
+	branch = develop

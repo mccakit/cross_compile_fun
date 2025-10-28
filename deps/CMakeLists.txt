@@ -47,13 +47,11 @@ else()
     target_link_libraries(imgui PUBLIC OpenGL::GL)
 endif()
 
-add_library(stb STATIC)
-file(GLOB stb_src stb/*.c)
-target_sources(stb PRIVATE ${stb_src})
-target_include_directories(stb PUBLIC stb)
-
 add_library(implot STATIC)
 file(GLOB implot_src "${CMAKE_CURRENT_SOURCE_DIR}/implot/*.cpp")
 target_sources(implot PRIVATE ${implot_src})
 target_include_directories(implot PUBLIC implot)
 target_link_libraries(implot PRIVATE imgui)
+
+set(NLOHMANN_JSON_BUILD_MODULES ON)
+add_subdirectory(nlohmann_json)
