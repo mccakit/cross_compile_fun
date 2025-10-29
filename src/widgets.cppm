@@ -9,8 +9,24 @@ export namespace widgets
     void centered_text(std::string_view text)
     {
         float text_width = ImGui::CalcTextSize(text.data()).x;
-        ImGui::SetCursorPosX((ImGui::GetWindowWidth() - text_width) * 0.5f);
+        float available_width = ImGui::GetContentRegionAvail().x;
+        float indent_amount = (available_width - text_width) * 0.5f;
+        ImGui::Indent(indent_amount);
         ImGui::Text("%s", text.data());
+        ImGui::Unindent(indent_amount);
+    }
+    void centered_wrapped_text(std::string_view text)
+    {
+        float text_width = ImGui::CalcTextSize(text.data()).x;
+        float available_width = ImGui::GetContentRegionAvail().x;
+        if(text_width > available_width)
+        {
+            ImGui::TextWrapped("%s", text.data());
+        }
+        else
+        {
+            centered_text(text);
+        }
     }
     void animated_waves(const float& time, ImVec2 window_size)
     {
@@ -38,5 +54,24 @@ export namespace widgets
         float aspect_ratio = static_cast<float>(gif_data[0].width) / static_cast<float>(gif_data[0].height);
         ImVec2 image_size = ImVec2(window_size.x * 0.8f, window_size.x * 0.8f / aspect_ratio);
         ImGui::Image((ImTextureID)(intptr_t)gif_data[frame].texture, image_size);
+    }
+    void centered_listbox(const char* label, int* selection, const std::vector<std::string>& items)
+    {
+        float max_text_width = 0.0f;
+        for (const auto& item : items)
+        {
+            max_text_width = std::max(max_text_width, ImGui::CalcTextSize(item.c_str()).x);
+        }
+        std::vector<const char*> items_cstr;
+        items_cstr.reserve(items.size());
+        for (const auto& item : items)
+        {
+            items_cstr.push_back(item.c_str());
+        }
+        float available_width = ImGui::GetContentRegionAvail().x;
+        float indent_amount = (available_width - max_text_width) * 0.5f;
+        ImGui::SameLine(indent_amount - 10.0f);
+        ImGui::SetNextItemWidth(max_text_width + 20.0f);
+        ImGui::ListBox(label, selection, items_cstr.data(), items.size());
     }
 }

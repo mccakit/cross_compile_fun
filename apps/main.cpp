@@ -158,14 +158,14 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     ImGui::NewLine();
     static cpr::AsyncResponse future;
     static bool requestPending = false;
-    static float lastRequestTime = 0.0f;
+    static float lastRequestTime1 = 0.0f;
     static cpr::Response r {};
     static json response {};
-    if (!requestPending && time - lastRequestTime >= 5.0f)
+    if (!requestPending && time - lastRequestTime1 >= 5.0f)
     {
         future = cpr::GetAsync(cpr::Url{"https://uselessfacts.jsph.pl/random.json?language=en"}, ssl_options);
         requestPending = true;
-        lastRequestTime = time;
+        lastRequestTime1 = time;
     }
 
     if (requestPending && future.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
@@ -185,7 +185,36 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     ImGui::NewLine();
     widgets::centered_text("Bluetooth!");
     ImGui::NewLine();
-    ImGui::TextWrapped(bt::get_paired_devices().dump(4).c_str());
+    static json bt_devices {};
+    static float lastRequestTime2 = 0.0f;
+    static std::vector<std::string> bt_device_names;
+    if (time - lastRequestTime2 >= 5.0f)
+    {
+        bt_devices = bt::get_paired_devices();
+        bt_device_names.clear();
+        for (const auto& device : bt_devices)
+        {
+            bt_device_names.push_back(device["name"]);
+        }
+        lastRequestTime2 = time;
+    }
+    static int selected_device = -1;
+    if(bt_device_names.size() > 0)
+    {
+        widgets::centered_listbox("###Bluetooth Devices", &selected_device, bt_device_names);
+    }
+    else {
+    {
+        widgets::centered_text("Searching for devices...");
+    }
+    }
+    if (selected_device >= 0 && selected_device < bt_devices.size())
+    {
+        ImGui::NewLine();
+        widgets::centered_text("Selected Device: " + bt_device_names[selected_device]);
+        ImGui::NewLine();
+        widgets::centered_text("Selected MAC Address: " + std::string(bt_devices[selected_device]["address"]));
+    }
     ImGui::NewLine();
     if (ImGui::Button("Twisted Garden", ImVec2(window_size.x * 0.4f, 0)))
     {

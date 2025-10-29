@@ -55,6 +55,6 @@ export namespace bt
         jni_env->DeleteLocalRef(bt_class);
         info(bt_module, "Successfully retrieved paired devices");
         json result {json::parse(jni_out_str)};
-        return result;
+        return result[0]["devices"];
     }
 }
