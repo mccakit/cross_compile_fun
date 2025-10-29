@@ -230,14 +230,19 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     }
     ImGui::NewLine();
     widgets::centered_text("Serial Port Buffer");
-    static float lastRequestTime3 = 0.0f;
+    static float lastRequestTime3 {};
     static std::string buffer {};
-    if (time - lastRequestTime3 >= 10.0f)
+    static json mcu_output {};
+    if (time - lastRequestTime3 >= 5.0f)
     {
         buffer = bt::buffer();
+        if(buffer.size() > 0)
+        {
+            mcu_output = json::parse(buffer);
+        }
         lastRequestTime3 = time;
     }
-    ImGui::TextWrapped(buffer.c_str());
+    ImGui::TextWrapped(mcu_output.dump(4).c_str());
     ImGui::NewLine();
     if (ImGui::Button("Twisted Garden", ImVec2(window_size.x * 0.4f, 0)))
     {
