@@ -35,7 +35,7 @@ ImFont *font{};
 // image
 std::vector<texture::image_data> gif_data{};
 //ssl
-std::string ca_buffer {};
+cpr::SslOptions ssl_options {};
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD | SDL_INIT_AUDIO);
@@ -84,7 +84,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     font = io.Fonts->AddFontFromMemoryTTF(data2, datasize, 30);
 
     void *data {SDL_LoadFileWrapper("cacert-2025-09-09.pem", &datasize)};
-    ca_buffer = std::string(static_cast<char*>(data), datasize);
+    ssl_options = cpr::Ssl(cpr::ssl::CaBuffer(std::move(std::string(static_cast<char*>(data), datasize))));
     return SDL_APP_CONTINUE;
 }
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
@@ -149,10 +149,10 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     static bool requestPending = false;
     static float lastRequestTime = 0.0f;
     static cpr::Response r {};
-    size_t datasize{};
+    static json response {};
     if (!requestPending && time - lastRequestTime >= 5.0f)
     {
-        future = cpr::GetAsync(cpr::Url{"https://www.google.com/"}, cpr::Ssl(cpr::ssl::CaBuffer(std::move(ca_buffer))));
+        future = cpr::GetAsync(cpr::Url{"https://uselessfacts.jsph.pl/random.json?language=en"}, ssl_options);
         requestPending = true;
         lastRequestTime = time;
     }
@@ -160,6 +160,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     if (requestPending && future.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
     {
         r = future.get();
+        response = json::parse(r.text);
         requestPending = false;
     }
     if (r.text.empty())
@@ -168,7 +169,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     }
     else
     {
-        ImGui::TextWrapped(r.text.c_str());
+        ImGui::TextWrapped(response["text"].get<std::string>().c_str());
     }
     ImGui::NewLine();
     if (ImGui::Button("Twisted Garden", ImVec2(window_size.x * 0.4f, 0)))
