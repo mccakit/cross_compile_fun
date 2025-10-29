@@ -1,13 +1,14 @@
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_main.h>
 #include <glad/glad.h>
+#include <SDL3/SDL_opengl.h>
+#include <SDL3_image/SDL_image.h>
+#include <SDL3_mixer/SDL_mixer.h>
+#include <cpr/cpr.h>
 #include <imgui.h>
 #include <imgui_impl_opengl3.h>
 #include <imgui_impl_sdl3.h>
 #include <implot.h>
-#include <SDL3/SDL.h>
-#include <SDL3/SDL_main.h>
-#include <SDL3/SDL_opengl.h>
-#include <SDL3_mixer/SDL_mixer.h>
-#include <SDL3_image/SDL_image.h>
 import std;
 import sdl_load_wrapper;
 import texture;
@@ -16,10 +17,10 @@ import widgets;
 import nlohmann.json;
 using json = nlohmann::json;
 
-SDL_Window *window {};
-SDL_WindowFlags window_flags {};
-SDL_GLContext gl_context {};
-ImGuiIO ioObject {};
+SDL_Window *window{};
+SDL_WindowFlags window_flags{};
+SDL_GLContext gl_context{};
+ImGuiIO ioObject{};
 ImGuiIO &io = ioObject;
 ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 SDL_AppResult app_quit = SDL_APP_CONTINUE;
@@ -29,9 +30,9 @@ MIX_Mixer *mixer{};
 MIX_Track *track{};
 MIX_Audio *audio{};
 // font
-ImFont *font {};
-//image
-std::vector<texture::image_data> gif_data {};
+ImFont *font{};
+// image
+std::vector<texture::image_data> gif_data{};
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD | SDL_INIT_AUDIO);
@@ -60,9 +61,10 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 
     SDL_Surface *surface;
     texture::image_data image{};
-    IMG_Animation* anim = IMG_LoadAnimation("nameless_deity.gif");
+    IMG_Animation *anim = IMG_LoadAnimation("nameless_deity.gif");
     gif_data.reserve(anim->count);
-    for (int i = 0; i < anim->count; i++) {
+    for (int i = 0; i < anim->count; i++)
+    {
         surface = anim->frames[i];
         surface = SDL_ConvertSurface(surface, SDL_PIXELFORMAT_RGBA32);
         texture_from_surface(surface, image);
@@ -127,22 +129,42 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     static constexpr std::string_view title = "Cross Compile Fun!";
     widgets::centered_text(title);
-
-    static std::array<char, 32> fps_text;
-    std::snprintf(fps_text.data(), fps_text.size(), "FPS: %.1f", ImGui::GetIO().Framerate);
-    float fps_width = ImGui::CalcTextSize(fps_text.data()).x;
-    widgets::centered_text(fps_text.data());
-
-    ImGui::TableNextRow();
-    ImGui::TableSetColumnIndex(1);
+    static std::string fps_text{};
+    fps_text = std::format("FPS: {:.1f}", ImGui::GetIO().Framerate);
+    widgets::centered_text(fps_text);
+    ImGui::NewLine();
     widgets::animated_waves(time, window_size);
-
-    ImGui::TableNextRow();
-    ImGui::TableSetColumnIndex(1);
+    ImGui::NewLine();
     widgets::gif(time, window_size, gif_data);
+    ImGui::NewLine();
+    widgets::centered_text("Web Requests!");
+    ImGui::NewLine();
+    static cpr::AsyncResponse future;
+    static bool requestPending = false;
+    static float lastRequestTime = 0.0f;
+    static cpr::Response r {};
 
-    ImGui::TableNextRow();
-    ImGui::TableSetColumnIndex(1);
+    if (!requestPending && time - lastRequestTime >= 5.0f)
+    {
+        future = cpr::GetAsync(cpr::Url{"http://example.com/"});
+        requestPending = true;
+        lastRequestTime = time;
+    }
+
+    if (requestPending && future.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
+    {
+        r = future.get();
+        requestPending = false;
+    }
+    if (r.text.empty())
+    {
+        widgets::centered_text("Waiting for response...");
+    }
+    else
+    {
+        ImGui::TextWrapped(r.text.c_str());
+    }
+    ImGui::NewLine();
     if (ImGui::Button("Twisted Garden", ImVec2(window_size.x * 0.4f, 0)))
     {
         audio = MIX_LoadAudio(mixer, "twisted_garden.mp3", true);
@@ -157,8 +179,8 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         MIX_PlayTrack(track, 0);
     }
 
-    ImGui::TableNextRow();
-    ImGui::TableSetColumnIndex(1);
+    ImGui::SameLine();
+    ImGui::NewLine();
     static bool music_playing{true};
     if (ImGui::Button(music_playing ? "Pause" : "Resume", ImVec2(window_size.x * 0.8f, 0)))
     {
@@ -172,15 +194,14 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         }
         music_playing = !music_playing;
     }
-
     ImGui::PopFont();
     ImGui::EndTable();
     ImGui::End();
     ImGui::Render();
 
     glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
-    glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w,
-                 clear_color.z * clear_color.w, clear_color.w);
+    glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w,
+                 clear_color.w);
     glClear(GL_COLOR_BUFFER_BIT);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     SDL_GL_SwapWindow(window);

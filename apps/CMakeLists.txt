@@ -39,6 +39,7 @@ target_link_libraries(
         gl_config
         widgets
         nlohmann_json_modules
+        cpr::cpr
 )
 if(EMSCRIPTEN)
     target_link_libraries(
