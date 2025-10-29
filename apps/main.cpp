@@ -1,3 +1,4 @@
+#include "cpr/auth.h"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <glad/glad.h>
@@ -33,6 +34,8 @@ MIX_Audio *audio{};
 ImFont *font{};
 // image
 std::vector<texture::image_data> gif_data{};
+//ssl
+std::string ca_buffer {};
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD | SDL_INIT_AUDIO);
@@ -79,6 +82,9 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     size_t datasize{};
     void *data2{SDL_LoadFileWrapper("Ubuntu-Regular.ttf", &datasize)};
     font = io.Fonts->AddFontFromMemoryTTF(data2, datasize, 30);
+
+    void *data {SDL_LoadFileWrapper("cacert-2025-09-09.pem", &datasize)};
+    ca_buffer = std::string(static_cast<char*>(data), datasize);
     return SDL_APP_CONTINUE;
 }
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
@@ -143,10 +149,10 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     static bool requestPending = false;
     static float lastRequestTime = 0.0f;
     static cpr::Response r {};
-
+    size_t datasize{};
     if (!requestPending && time - lastRequestTime >= 5.0f)
     {
-        future = cpr::GetAsync(cpr::Url{"http://example.com/"});
+        future = cpr::GetAsync(cpr::Url{"https://www.google.com/"}, cpr::Ssl(cpr::ssl::CaBuffer(std::move(ca_buffer))));
         requestPending = true;
         lastRequestTime = time;
     }

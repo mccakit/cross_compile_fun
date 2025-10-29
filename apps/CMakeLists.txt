@@ -49,6 +49,8 @@ if(EMSCRIPTEN)
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/sky_after_rain.mp3@/"
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/twisted_garden.mp3@/"
             "--preload-file ${CMAKE_CURRENT_LIST_DIR}/nameless_deity.gif@/"
+            "--preload-file ${CMAKE_CURRENT_LIST_DIR}/cacert-2025-09-09.pem@/"
+
     )
 endif()
 macro(copy_helper filename)
@@ -67,6 +69,7 @@ if(NOT EMSCRIPTEN)
     copy_helper("sky_after_rain.mp3")
     copy_helper("twisted_garden.mp3")
     copy_helper("nameless_deity.gif")
+    copy_helper("cacert-2025-09-09.pem")
 endif()
 if(Linux)
     install(
@@ -76,7 +79,7 @@ if(Linux)
             PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
     )
     install(
-        FILES Ubuntu-Regular.ttf sky_after_rain.mp3 twisted_garden.mp3 nameless_deity.gif
+        FILES Ubuntu-Regular.ttf sky_after_rain.mp3 twisted_garden.mp3 nameless_deity.gif cacert-2025-09-09.pem
         DESTINATION crossfun.AppDir/usr/bin
     )
     install(
@@ -88,7 +91,7 @@ endif()
 if(WIN32)
     install(TARGETS main RUNTIME DESTINATION .)
     install(
-        FILES Ubuntu-Regular.ttf sky_after_rain.mp3 twisted_garden.mp3 nameless_deity.gif
+        FILES Ubuntu-Regular.ttf sky_after_rain.mp3 twisted_garden.mp3 nameless_deity.gif cacert-2025-09-09.pem
         DESTINATION .
     )
 endif()
