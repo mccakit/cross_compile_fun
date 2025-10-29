@@ -233,14 +233,29 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     static float lastRequestTime3 {};
     static std::string buffer {};
     static json mcu_output {};
+    static cpr::AsyncResponse future2;
+    static bool requestPending2 = false;
+    static cpr::Response r2 {};
+    static json response2 {};
     if (time - lastRequestTime3 >= 5.0f)
     {
         buffer = bt::buffer();
         if(buffer.size() > 0)
         {
             mcu_output = json::parse(buffer);
+            future2 = cpr::PostAsync(cpr::Url{"https://e2b4f59b5294.ngrok-free.app/api/v1/measurements"},
+                                                 cpr::Body{mcu_output.dump()},
+                                                 cpr::Header{{"Content-Type", "application/json"}},
+                                                 ssl_options);
+            requestPending2 = true;
         }
         lastRequestTime3 = time;
+    }
+    if (requestPending2 && future2.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
+    {
+        r2 = future2.get();
+        response2 = json::parse(r2.text);
+        requestPending2 = false;
     }
     ImGui::TextWrapped(mcu_output.dump(4).c_str());
     ImGui::NewLine();
