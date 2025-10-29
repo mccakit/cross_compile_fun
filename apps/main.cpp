@@ -212,33 +212,32 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         widgets::centered_text("Selected MAC Address: " + std::string(bt_devices[selected_device]["address"]));
     }
     ImGui::NewLine();
-    static const std::string giant_text = R"(
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-
-    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-
-    Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-
-    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
-
-    Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.
-
-    Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
-
-    The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs. How vexingly quick daft zebras jump! Sphinx of black quartz, judge my vow. The five boxing wizards jump quickly.
-
-    This is a lot of text to make sure we can scroll through the content. We need enough text to overflow the window so that the scroll functionality becomes visible and testable. This giant block of text should do the trick!
-
-    More text here to ensure we have plenty of content. Let's add some more paragraphs to really fill up the space and make scrolling necessary. The scroll module should allow you to drag anywhere on the window to scroll through this content.
-
-    Additional content to extend the scrollable area even further. We want to make absolutely sure that there's enough text here to require scrolling on most screen sizes. Keep adding more and more text until we're confident the scroll will be triggered.
-
-    Even more text! This should definitely be enough to test the scrolling functionality. You should be able to click and drag anywhere on the window (except on buttons and interactive elements) to scroll through all this content.
-
-    Final paragraph to wrap things up. This giant block of text serves as a perfect test case for the scroll functionality. Try dragging up and down to see it in action!)";
-    ImGui::Text("%s", giant_text.c_str());
+    widgets::centered_text("Connection Status: " + std::string(bt::is_connected() ? "ON" : "OFF"));
+    ImGui::NewLine();
+    static bool connected = false;
+    if (ImGui::Button(connected ? "Disconnect" : "Connect", ImVec2(window_size.x * 0.8f, 0)))
+    {
+        if (!connected)
+        {
+            std::string address = bt_devices[selected_device]["address"];
+            connected = bt::connect(address);
+        }
+        else
+        {
+            bt::disconnect();
+            connected = false;
+        }
+    }
+    ImGui::NewLine();
+    widgets::centered_text("Serial Port Buffer");
+    static float lastRequestTime3 = 0.0f;
+    static std::string buffer {};
+    if (time - lastRequestTime3 >= 10.0f)
+    {
+        buffer = bt::buffer();
+        lastRequestTime3 = time;
+    }
+    ImGui::TextWrapped(buffer.c_str());
     ImGui::NewLine();
     if (ImGui::Button("Twisted Garden", ImVec2(window_size.x * 0.4f, 0)))
     {
