@@ -1,4 +1,3 @@
-#include "cpr/auth.h"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <glad/glad.h>
@@ -10,6 +9,7 @@
 #include <imgui_impl_opengl3.h>
 #include <imgui_impl_sdl3.h>
 #include <implot.h>
+#include <jni.h>
 import std;
 import sdl_load_wrapper;
 import texture;
@@ -17,6 +17,8 @@ import gl_config;
 import widgets;
 import nlohmann.json;
 using json = nlohmann::json;
+import bt;
+import scroll;
 
 SDL_Window *window{};
 SDL_WindowFlags window_flags{};
@@ -36,6 +38,7 @@ ImFont *font{};
 std::vector<texture::image_data> gif_data{};
 //ssl
 cpr::SslOptions ssl_options {};
+
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD | SDL_INIT_AUDIO);
@@ -74,17 +77,23 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         gif_data.push_back(image);
     }
     SDL_DestroySurface(surface);
+    //Audio
     audioDevice = SDL_OpenAudioDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, nullptr);
     MIX_Init();
     mixer = MIX_CreateMixerDevice(audioDevice, nullptr);
     track = MIX_CreateTrack(mixer);
-
+    //Fonts
     size_t datasize{};
     void *data2{SDL_LoadFileWrapper("Ubuntu-Regular.ttf", &datasize)};
     font = io.Fonts->AddFontFromMemoryTTF(data2, datasize, 30);
-
+    //CA certs
     void *data {SDL_LoadFileWrapper("cacert-2025-09-09.pem", &datasize)};
     ssl_options = cpr::Ssl(cpr::ssl::CaBuffer(std::move(std::string(static_cast<char*>(data), datasize))));
+    //Bluetooth
+    JNIEnv* env = (JNIEnv*)SDL_GetAndroidJNIEnv();
+    jobject activity = (jobject)SDL_GetAndroidActivity();
+    bt::init(env, activity);
+    env->DeleteLocalRef(activity);
     return SDL_APP_CONTINUE;
 }
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
@@ -119,10 +128,14 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     ImGui::SetNextWindowPos(ImVec2(0, 0));
     ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
     ImGui::Begin("Main", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove);
-
+    ImVec2 delta = ImGui::GetMouseDragDelta(ImGuiMouseButton_Left);
+    scroll::on_void(delta, ImGuiMouseButton_Left);
+    ImGui::ResetMouseDragDelta();
     ImVec2 window_size = ImGui::GetWindowSize();
     static float time = 0.0f;
     time += ImGui::GetIO().DeltaTime;
+
+    ImGui::PushFont(font);
 
     ImGui::BeginTable("ImageTable", 3, ImGuiTableFlags_SizingStretchProp);
     ImGui::TableSetupColumn("Left", ImGuiTableColumnFlags_WidthStretch, 0.1f);
@@ -131,8 +144,6 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     ImGui::TableNextRow();
     ImGui::TableSetColumnIndex(1);
-    ImGui::PushFont(font);
-
     static constexpr std::string_view title = "Cross Compile Fun!";
     widgets::centered_text(title);
     static std::string fps_text{};
@@ -171,6 +182,10 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     {
         ImGui::TextWrapped(response["text"].get<std::string>().c_str());
     }
+    ImGui::NewLine();
+    widgets::centered_text("Bluetooth!");
+    ImGui::NewLine();
+    ImGui::TextWrapped(bt::get_paired_devices().dump(4).c_str());
     ImGui::NewLine();
     if (ImGui::Button("Twisted Garden", ImVec2(window_size.x * 0.4f, 0)))
     {

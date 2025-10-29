@@ -22,3 +22,11 @@ endif()
 add_library(widgets STATIC)
 target_sources(widgets PUBLIC FILE_SET CXX_MODULES FILES widgets.cppm)
 target_link_libraries(widgets PRIVATE imgui implot texture)
+
+add_library(bt STATIC)
+target_sources(bt PUBLIC FILE_SET CXX_MODULES FILES bt.cppm)
+target_link_libraries(bt PRIVATE nlohmann_json_modules)
+
+add_library(scroll STATIC)
+target_sources(scroll PUBLIC FILE_SET CXX_MODULES FILES scroll.cppm)
+target_link_libraries(scroll PRIVATE imgui)

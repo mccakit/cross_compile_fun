@@ -40,6 +40,8 @@ target_link_libraries(
         widgets
         nlohmann_json_modules
         cpr::cpr
+        bt
+        scroll
 )
 if(EMSCRIPTEN)
     target_link_libraries(
